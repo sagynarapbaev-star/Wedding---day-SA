@@ -10,90 +10,72 @@
         
         body, html {
             height: 100%;
-            /* ИЗЫСКАННЫЙ ФОН С КЛАССИЧЕСКИМ ВИНТАЖНЫМ УЗОРОМ НА ВСЮ ПЛОЩАДЬ */
-            background-color: #f4edd4;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 16c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 28c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm14-14c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zM16 30c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm14-2c3.3 0 6-2.7 6-6s-2.7-6-6-6-6 2.7-6 6 2.7 6 6 6zm0 4c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm10-2c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm-20 0c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z' fill='%23e6dcbc' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+            /* ПРЕМИАЛЬНАЯ ТЕКСТУРА БУМАГИ ВЕРЖЕ НА ВЕСЬ ФОН */
+            background-color: #FAF9F6;
+            background-image: 
+                linear-gradient(90deg, rgba(212,175,55,0.01) 1px, transparent 1px),
+                linear-gradient(rgba(212,175,55,0.01) 1px, transparent 1px);
+            background-size: 4px 4px;
+            background-attachment: fixed;
             color: #2A2F35;
             font-family: 'Cormorant Garamond', serif;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* КРАСИВЫЕ КАЛЛИГРАФИЧЕСКИЕ ИМЕНА */
-        .premium-name {
+        /* РОСКОШНЫЙ КАЛЛИГРАФИЧЕСКИЙ СТИЛЬ ДЛЯ МОЛОДЫХ */
+        .couple-names-style {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.4rem;
-            color: #9E8454;
-            text-shadow: 1px 1px 2px rgba(158, 132, 84, 0.2);
-            margin: 8px 0;
-            font-weight: 400;
+            font-size: 3.5rem; /* Увеличено */
+            color: #b38e5d; /* Нежный розово-золотой */
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3); /* Золотое сияние чувств */
+            margin: 15px 0;
             display: block;
+            letter-spacing: -1px;
         }
-        
-        .premium-name-small {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.3rem;
-            color: #836d43;
-            text-shadow: 0.5px 0.5px 1px rgba(131, 109, 67, 0.2);
-            margin: 4px 0;
+
+        /* СКРОМНЫЙ, НО УВАЖИТЕЛЬНЫЙ СТИЛЬ ДЛЯ РОДИТЕЛЕЙ */
+        .parents-names-style {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; /* Сильно уменьшено */
+            font-weight: 600;
+            color: #2A2F35; /* Строгий цвет */
+            letter-spacing: 1px;
+            margin-top: 5px;
+            text-transform: none; /* Убран капс */
             display: block;
         }
 
-        /* АНИМАЦИЯ ЛЕПЕСТКОВ РОЗ ПО ВСЕМУ ЭКРАНУ */
+        /* АНИМАЦИЯ ЛЕПЕСТКОВ РОЗ (УВЕЛИЧЕНО В 2 РАЗА) */
         .rose-petal {
             position: fixed;
             top: -20px;
             pointer-events: none;
-            z-index: 1;
-            background: radial-gradient(circle at 40% 40%, #ffccd5, #ffb3c1 60%, #ffa6c9);
+            z-index: 1; /* Под карточкой */
+            background: radial-gradient(circle at 40% 40%, #ffccd5, #ffb3c1 60%, #ff4d6d);
             border-radius: 15px 0 15px 15px;
-            opacity: 0.4;
+            opacity: 0.6;
             animation: fall linear infinite;
         }
         @keyframes fall {
-            0% { top: -20px; transform: translateX(0) rotate(0deg) scale(0.6); opacity: 0.5; }
-            50% { transform: translateX(50px) rotate(180deg) scale(0.8); opacity: 0.4; }
-            100% { top: 105vh; transform: translateX(100px) rotate(360deg) scale(0.6); opacity: 0; }
+            0% { top: -20px; transform: translateX(0) rotate(0deg) scale(0.6); opacity: 0.7; }
+            50% { transform: translateX(50px) rotate(180deg) scale(0.8); opacity: 0.6; }
+            100% { top: 105vh; transform: translateX(100px) rotate(360deg) scale(0.5); opacity: 0; }
         }
 
-        /* ЗНАЧОК МУЗЫКИ НАД КОНВЕРТОМ (ФИКСИРОВАН) */
-        #cozy-music-bar {
+        /* ЭФФЕКТ СЕРДЕЧЕК ПРИ ОТКРЫТИИ */
+        .heart-particle {
             position: fixed;
-            top: 25px; 
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(158, 132, 84, 0.3);
-            padding: 10px 24px;
-            border-radius: 30px;
-            display: flex; 
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(158, 132, 84, 0.15);
-            z-index: 100000; 
-            cursor: pointer;
+            pointer-events: none;
+            z-index: 10001;
+            will-change: transform, opacity;
+            background: radial-gradient(circle at 35% 35%, #e63946, #d90429);
+            clip-path: path('M12 4.419c-2.426-3.484-7.208-3.484-9.633 0-2.508 3.612-2.508 9.471 0 13.084l9.633 9.497 9.633-9.497c2.508-3.613 2.508-9.472 0-13.084-2.425-3.484-7.207-3.484-9.633 0z');
+            opacity: 1;
+            transition: transform 2s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 2s ease-out;
         }
 
-        .music-bar-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #9E8454;
-            font-weight: 600;
-        }
-        .music-btn-circle {
-            width: 28px;
-            height: 28px;
-            background: #9E8454;
-            color: #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.8rem;
-        }
-
-        /* СТРОГИЙ СТИЛЬНЫЙ КОНВЕРТ */
+        /* ЭКРАН С КОНВЕРТОМ (ПРИОРИТЕТ 1) */
         #envelope-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -104,6 +86,7 @@
             align-items: center;
             z-index: 99999;
             cursor: pointer;
+            transition: opacity 0.5s ease;
         }
 
         .envelope {
@@ -126,6 +109,7 @@
             position: absolute;
             top: 14px; left: 14px; right: 14px; bottom: 14px;
             border: 1px solid rgba(212, 175, 55, 0.25);
+            pointer-events: none;
         }
 
         .heart-seal-wrapper {
@@ -135,6 +119,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            filter: drop-shadow(0 8px 15px rgba(178, 31, 31, 0.4));
         }
 
         .heart-svg-seal {
@@ -151,6 +136,7 @@
             font-family: 'Great Vibes', cursive;
             font-weight: bold;
             font-size: 2.1rem;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
             margin-top: -6px;
         }
 
@@ -164,12 +150,55 @@
             margin-top: 15px;
         }
 
-        /* КАРТОЧКИ СТРАНИЦ */
+        /* МУЗЫКАЛЬНАЯ ПАНЕЛЬ */
+        #cozy-music-bar {
+            position: fixed;
+            top: 30px; 
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(158, 132, 84, 0.3);
+            padding: 10px 24px;
+            border-radius: 30px;
+            display: flex; 
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(158, 132, 84, 0.1);
+            z-index: 100000; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #cozy-music-bar:hover {
+            border-color: #9E8454;
+            transform: translateX(-50%) scale(1.03);
+        }
+        .music-bar-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #9E8454;
+            font-weight: 600;
+        }
+        .music-btn-circle {
+            width: 28px;
+            height: 28px;
+            background: #9E8454;
+            color: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        /* МНОГОСТРАНИЧНАЯ СИСТЕМА (ПРИОРИТЕТ 2) */
         .page {
             display: none;
-            position: absolute;
-            top: 0; left: 0; width: 100%; min-height: 100%;
-            padding: 100px 20px 40px 20px; 
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            padding: 95px 20px 30px 20px; 
+            overflow-y: auto;
             text-align: center;
             justify-content: center;
             align-items: center;
@@ -177,20 +206,20 @@
             opacity: 0;
             z-index: 5;
         }
-        .page.active { display: flex !important; animation: fadeInPage 0.4s ease forwards; }
+        .page.active { display: flex !important; animation: fadeInPage 0.6s ease forwards; }
         @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
         .content-card {
             width: 100%;
             max-width: 520px;
             margin: auto;
-            padding: 40px 25px;
-            background: #FFFFFF;
-            border: 1px solid rgba(158, 132, 84, 0.25);
+            padding: 45px 25px;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(158, 132, 84, 0.2);
             box-shadow: 0 20px 60px rgba(158, 132, 84, 0.08);
             border-radius: 2px;
             position: relative;
-            z-index: 10;
+            z-index: 10; /* Выше лепестков */
         }
         .content-card::after {
             content: '';
@@ -204,31 +233,17 @@
         
         .invitation-text {
             font-size: 1.15rem;
-            line-height: 1.7;
+            line-height: 1.8;
             font-style: italic;
             color: #3A4047;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
-        /* РОДИТЕЛИ */
-        .hosts-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-            border-top: 1px dashed rgba(158, 132, 84, 0.2);
-            padding-top: 15px;
-        }
-        .hosts-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .hosts-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 2px; color: #8A8475; }
+        .hosts-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: #8A8475; }
         .hosts-status { font-size: 0.9rem; font-style: italic; color: #8A8475; }
 
         /* НАВИГАЦИЯ */
-        .nav-box { display: flex; justify-content: center; gap: 12px; margin-top: 30px; width: 100%; position: relative; z-index: 20; }
+        .nav-box { display: flex; justify-content: center; gap: 12px; margin-top: 35px; width: 100%; position: relative; z-index: 20; }
         .btn-nav {
             padding: 11px 28px;
             background: #FFFFFF;
@@ -242,8 +257,9 @@
             transition: all 0.3s ease;
             text-decoration: none;
             font-weight: 500;
+            border-radius: 0;
         }
-        .btn-nav:hover { background: #9E8454; color: #FFFFFF; }
+        .btn-nav:hover { background: #9E8454; color: #FFFFFF; box-shadow: 0 5px 15px rgba(158, 132, 84, 0.15); }
 
         /* ТАЙМЕР */
         .timer-grid { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
@@ -251,18 +267,40 @@
         .timer-num { font-size: 1.5rem; color: #2A2F35; font-weight: 600; }
         .timer-label { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; color: #8A94A0; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* ТАЙМЛАЙН ПРОГРАММЫ */
+        /* БЛАГОРОДНАЯ ПРОГРАММА ВЕЧЕРА */
         .timeline-container {
             text-align: left;
             margin: 15px auto 5px auto;
-            max-width: 420px;
+            max-width: 440px;
         }
-        .timeline-item { display: flex; margin-bottom: 14px; }
-        .timeline-time { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; color: #9E8454; min-width: 55px; padding-top: 2px; }
-        .timeline-dot { margin: 0 12px; font-size: 1rem; line-height: 1; color: #9E8454; }
-        .timeline-text { font-size: 1.1rem; color: #333; line-height: 1.3; }
+        .timeline-item {
+            display: flex;
+            margin-bottom: 18px;
+            align-items: flex-start;
+        }
+        .timeline-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #9E8454;
+            min-width: 60px;
+            padding-top: 2px;
+        }
+        .timeline-dot {
+            margin: 0 15px;
+            font-size: 1rem;
+            line-height: 1;
+            padding-top: 2px;
+            color: #9E8454;
+        }
+        .timeline-text {
+            font-size: 1.15rem;
+            color: #333;
+            line-height: 1.4;
+            font-style: italic;
+        }
 
-        /* ДРЕСС-КОД */
+        /* ДРЕСС-КОД И АДРЕС - ОРИГИНАЛЬНЫЕ СТРАНИЦЫ */
         .dc-badge {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
@@ -273,300 +311,17 @@
             margin: 15px 0;
             display: inline-block;
             border-bottom: 1px solid #9E8454;
-            padding-bottom: 4px;
+            padding-bottom: 6px;
         }
 
-        /* КНИГА ПОЖЕЛАНИЙ */
-        .wish-input, .wish-text { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #E2DCD0; background: #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; outline: none; }
-        .wish-text { height: 75px; resize: none; }
-        .wishes-output { max-height: 130px; overflow-y: auto; text-align: left; font-size: 0.9rem; margin-top: 15px; }
-        .wish-item { padding: 10px; border-left: 2px solid #9E8454; background: #FAFAFA; margin-bottom: 6px; font-style: italic; }
-
-        /* ГАЛЕРЕЯ */
-        .upload-zone { border: 1px dashed #9E8454; padding: 20px 15px; cursor: pointer; background: #FFFFFF; margin-bottom: 15px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #7A7469; }
-        .gallery-preview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
-        .gallery-preview img { width: 100%; height: 70px; object-fit: cover; border-radius: 2px; }
-    </style>
-</head>
-<body>
-
-    <audio id="wedding-audio" src="music.mp3" loop preload="auto"></audio>
-
-    <div id="cozy-music-bar" onclick="toggleAudio(event)">
-        <span class="music-bar-text" id="music-status-text">Включить музыку</span>
-        <div class="music-btn-circle" id="music-icon">🎵</div>
-    </div>
-
-    <div id="envelope-screen" onclick="openEnvelope()">
-        <div class="envelope">
-            <div class="heart-seal-wrapper">
-                <svg class="heart-svg-seal" viewBox="0 0 32 29.6">
-                    <defs>
-                        <linearGradient id="sealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#E64C4C" />
-                            <stop offset="50%" style="stop-color:#B21F1F" />
-                            <stop offset="100%" style="stop-color:#7F0F0F" />
-                        </linearGradient>
-                    </defs>
-                    <path fill="url(#sealGradient)" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
-                </svg>
-                <div class="heart-seal-text">S&A</div>
-            </div>
-            <div class="envelope-text">Нажмите, чтобы открыть</div>
-        </div>
-    </div>
-
-    <div id="page1" class="page">
-        <div class="content-card">
-            <h2 id="guest-title-heading">Дорогой Гость</h2>
-            
-            <p class="invitation-text" style="font-weight: 700; color:#9E8454; margin-bottom: 15px; font-size: 1.3rem; font-style: normal;">Рады пригласить вас на наше семейное торжество!</p>
-            <p class="invitation-text" style="font-size: 1.1rem;">Разделите с нами один из самых счастливых и ответственных моментов — прекрасный праздник в честь бракосочетания наших детей Сагына и Айнуру.</p>
-            <p class="invitation-text" style="font-size: 1.1rem;">Ваши улыбки, добрые пожелания и поддержка станут главным украшением этого важного дня!</p>
-            
-            <div class="hosts-container">
-                <div class="hosts-block">
-                    <div class="hosts-title">Хозяева торжества</div>
-                    <span class="premium-name-small">Арстан & Нурайым</span>
-                    <div class="hosts-status">(Родители жениха)</div>
-                </div>
-                <div class="hosts-block" style="margin-top: 10px;">
-                    <span class="premium-name-small">Муктарбек & Шаарбу</span>
-                    <div class="hosts-status">(Родители невесты)</div>
-                </div>
-            </div>
-            
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(2)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page2" class="page">
-        <div class="content-card">
-            <h2>Слово молодожёнов</h2>
-            <p class="invitation-text" style="line-height: 1.8; font-size: 1.2rem;">В жизни каждого человека бывают моменты, когда весь мир замирает и открывается новая, чистая глава. Мы нашли это невероятное счастье и вдохновение друг в другe.</p>
-            <p class="invitation-text" style="line-height: 1.8; font-size: 1.2rem;">И перед тем как сделать этот самый важный шаг в наше общее будущее, мы хотим искренне пригласить вас стать главными свидетелями начала нашей большой истории.</p>
-            
-            <span class="premium-name">Сагын & Айнуру</span>
-            
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(1)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(3)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page3" class="page">
-        <div class="content-card">
-            <h2>Программа вечера</h2>
-            <p style="font-style: italic; font-size: 1.05rem; color: #7A828A; margin-bottom: 15px;">Тайминг нашего праздничного дня:</p>
-            
-            <div class="timeline-container">
-                <div class="timeline-item"><div class="timeline-time">17:00</div><div class="timeline-dot">•</div><div class="timeline-text">Сбор гостей</div></div>
-                <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-dot">•</div><div class="timeline-text">Начало</div></div>
-                <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-dot">•</div><div class="timeline-text">Выход молодых</div></div>
-                <div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-dot">•</div><div class="timeline-text">Поздравления родителей</div></div>
-                <div class="timeline-item"><div class="timeline-time">19:00</div><div class="timeline-dot">•</div><div class="timeline-text">Ужин</div></div>
-                <div class="timeline-item"><div class="timeline-time">19:30</div><div class="timeline-dot">•</div><div class="timeline-text">Музыкальная пауза</div></div>
-                <div class="timeline-item"><div class="timeline-time">20:30</div><div class="timeline-dot">•</div><div class="timeline-text">Поздравления молодых гостей</div></div>
-                <div class="timeline-item"><div class="timeline-time">21:00</div><div class="timeline-dot">•</div><div class="timeline-text">Конкурсы шоу</div></div>
-                <div class="timeline-item"><div class="timeline-time">21:20</div><div class="timeline-dot">•</div><div class="timeline-text">Танцевальная пауза</div></div>
-                <div class="timeline-item"><div class="timeline-time">22:00</div><div class="timeline-dot">•</div><div class="timeline-text">Конец</div></div>
-            </div>
-
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(2)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(4)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page4" class="page">
-        <div class="content-card">
-            <h2>Пожелания к стилю</h2>
-            <div class="dc-badge">Дресс-код торжества</div>
-            
-            <p class="invitation-text" style="font-size: 1.2rem; font-weight: 500; font-style: normal; color: #2A2F35; margin-top: 15px;">Будем рады видеть вас в элегантных вечерних платьях и классических костюмах.</p>
-
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(3)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(5)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page5" class="page">
-        <div class="content-card">
-            <h2>Адрес торжества</h2>
-            <p style="font-size: 1.45rem; font-weight: 700; color: #9E8454; margin-bottom: 6px;">Ресторан "Олигарх"</p>
-            <p style="font-size: 1.15rem; font-style: italic; margin-bottom: 12px; color:#4A5568;">г. Ош, микрорайон Анар, 1а</p>
-            <p style="font-size: 1.1rem; margin-bottom: 20px; font-style: italic; color: #2A2F35; font-weight: 600;">31 июля 2026 года в 17:00</p>
-            <a href="https://2gis.kg/osh/search/%D0%9E%D0%BB%D0%B8%D0%B3%D0%B0%D1%80%D1%85" target="_blank" class="btn-nav" style="display:inline-block; margin-bottom:10px;">Открыть карту 2ГИС 📍</a>
-
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(4)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(6)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page6" class="page">
-        <div class="content-card">
-            <h2>До торжества осталось</h2>
-            <div class="timer-grid">
-                <div class="timer-item"><div class="timer-num" id="days">00</div><div class="timer-label">Дней</div></div>
-                <div class="timer-item"><div class="timer-num" id="hours">00</div><div class="timer-label">Часов</div></div>
-                <div class="timer-item"><div class="timer-num" id="minutes">00</div><div class="timer-label">Мин</div></div>
-                <div class="timer-item"><div class="timer-num" id="seconds">00</div><div class="timer-label">Сек</div></div>
-            </div>
-
-            <h2 style="margin-top: 30px;">Поделитесь кадрами</h2>
-            <p style="font-style: italic; font-size: 1.05rem; color: #555; margin-bottom: 15px;">Сюда вы сможете загрузить фотографии с нашей свадьбы!</p>
-            
-            <div class="upload-zone" onclick="document.getElementById('file-input').click()">
-                <span style="font-size: 1.8rem; display:block; margin-bottom:4px;">📸</span>
-                Нажмите для выбора фото
-                <input type="file" id="file-input" accept="image/*" multiple style="display:none;" onchange="previewImages(event)">
-            </div>
-            <div class="gallery-preview" id="gallery-box"></div>
-
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(5)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(7)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page7" class="page">
-        <div class="content-card">
-            <h2>Книга пожеланий</h2>
-            <p style="font-style: italic; font-size:1.1rem; color:#555; margin-bottom:15px;">Напишите свои теплые слова для Сагына и Айнуру:</p>
-            
-            <input type="text" id="author" class="wish-input" placeholder="Ваше Имя">
-            <textarea id="text" class="wish-text" placeholder="Ваши изысканные пожелания..."></textarea>
-            <button onclick="saveWish()" class="btn-nav" style="width:100%; background:#9E8454; color:#fff;">Оставить пожелание</button>
-            
-            <div class="wishes-output" id="output-box"></div>
-
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(6)">Назад</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let isMusicPlaying = false;
-        const audioPlayer = document.getElementById('wedding-audio');
-
-        function loadGuestName() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const guestName = urlParams.get('name') || urlParams.get('to');
-            if (guestName) {
-                document.getElementById('guest-title-heading').innerText = guestName;
-            }
+        .dc-palette {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
         }
-        window.addEventListener('DOMContentLoaded', loadGuestName);
+        .dc-circle-wrapper { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .dc-circle { width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); }
+        .dc-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; text-transform: uppercase; color: #8A8475; letter-spacing: 1px; }
 
-        // ОТКРЫТИЕ КОНВЕРТА И МГНОВЕННЫЙ СТАРТ ЗВУКА
-        function openEnvelope() {
-            let screen = document.getElementById('envelope-screen');
-            if (!screen) return;
-
-            // Скрываем конверт безопасно
-            screen.style.display = 'none';
-
-            // Принудительный старт воспроизведения
-            audioPlayer.play().then(() => {
-                isMusicPlaying = true;
-                document.getElementById('music-status-text').innerText = "Музыка играет";
-            }).catch(e => {
-                console.log("Блокировка автозвука. Ждем повторного нажатия на плашку.");
-                document.getElementById('music-status-text').innerText = "Музыка на паузе";
-            });
-
-            navigateToPage(1); 
-            startPetalsFalling(); 
-        }
-
-        function navigateToPage(num) {
-            document.querySelectorAll('.page').forEach(p => {
-                p.classList.remove('active');
-            });
-            let activePage = document.getElementById('page' + num);
-            if (activePage) {
-                activePage.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function toggleAudio(event) {
-            if(event) event.stopPropagation(); 
-            let statusText = document.getElementById('music-status-text');
-            if (isMusicPlaying) {
-                audioPlayer.pause();
-                isMusicPlaying = false;
-                statusText.innerText = "Музыка на паузе";
-            } else {
-                audioPlayer.play().then(() => {
-                    isMusicPlaying = true;
-                    statusText.innerText = "Музыка играет";
-                }).catch(err => {
-                    alert("Кликните еще раз по плашке для включения звука.");
-                });
-            }
-        }
-
-        function saveWish() {
-            let name = document.getElementById('author').value.trim();
-            let wish = document.getElementById('text').value.trim();
-            if(!name || !wish) return alert('Заполните поля имени и текста.');
-            let box = document.getElementById('output-box');
-            let item = document.createElement('div');
-            item.className = 'wish-item';
-            item.innerHTML = `<strong>${name}:</strong> ${wish}`;
-            box.insertBefore(item, box.firstChild);
-            document.getElementById('author').value = '';
-            document.getElementById('text').value = '';
-        }
-
-        function previewImages(event) {
-            let files = event.target.files;
-            let box = document.getElementById('gallery-box');
-            for(let i=0; i<files.length; i++) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    let img = document.createElement('img');
-                    img.src = e.target.result;
-                    box.insertBefore(img, box.firstChild);
-                }
-                reader.readAsDataURL(files[i]);
-            }
-        }
-
-        function startPetalsFalling() {
-            setInterval(() => {
-                let petal = document.createElement('div');
-                petal.className = 'rose-petal';
-                petal.style.left = Math.random() * window.innerWidth + 'px';
-                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                petal.style.width = petal.style.height = (Math.random() * 6 + 8) + 'px';
-                document.body.appendChild(petal);
-                setTimeout(() => petal.remove(), 7000);
-            }, 350); 
-        }
-
-        const weddingDate = new Date('July 31, 2026 17:00:00').getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = weddingDate - now;
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+        .address-card-border {
