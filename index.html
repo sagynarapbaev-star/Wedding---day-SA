@@ -58,7 +58,7 @@
             align-items: center;
             z-index: 10000;
             cursor: pointer;
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
         .envelope {
@@ -237,10 +237,6 @@
         .timer-num { font-size: 1.6rem; color: #2A2F35; font-weight: 600; }
         .timer-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; color: #8A94A0; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* ДРЕСС-КОД ПАЛИТРА */
-        .palette { display: flex; justify-content: center; gap: 12px; margin: 20px 0; }
-        .circle { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #E2E8F0; }
-
         /* КНИГА ПОЖЕЛАНИЙ */
         .wish-input, .wish-text { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #E2DCD0; background: #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; outline: none; }
         .wish-text { height: 80px; resize: none; }
@@ -255,7 +251,7 @@
 </head>
 <body>
 
-    <audio id="wedding-audio" src="music.mp3" loop preload="auto"></audio>
+    <audio id="wedding-audio" loop preload="auto"></audio>
 
     <div id="cozy-music-bar" onclick="toggleAudio(event)">
         <span class="music-bar-text" id="music-status-text">Включить музыку</span>
@@ -283,9 +279,7 @@
 
     <div id="page1" class="page">
         <div class="content-card">
-            <h2>Дорогой Гость</h2>
-            <p style="font-family:'Montserrat', sans-serif; font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:15px; color:#8A8475;">Персональное приглашение для:</p>
-            <input type="text" id="guest-name-input" placeholder="Введите Ваше имя..." style="width: 85%; padding: 10px; border: none; border-bottom: 2px solid #9E8454; text-align: center; font-size: 1.4rem; font-family: 'Cormorant Garamond'; background: transparent; margin-bottom: 30px; color: #2A2F35; outline: none; font-style: italic; font-weight: 600;">
+            <h2 id="guest-title-heading" style="line-height: 1.4; margin-bottom: 30px;">Дорогой Гость</h2>
             
             <p class="invitation-text" style="font-weight: 700; color:#9E8454; margin-bottom: 12px; font-size: 1.3rem;">Дорогие наши родные и уважаемые гости!</p>
             <p class="invitation-text" style="font-size: 1.15rem;">С огромной радостью приглашаем Вас разделить с нами один из самых счастливых дней нашей семьи — торжество в честь бракосочетания Сагын и Айнуру.</p>
@@ -322,18 +316,7 @@
             <p style="font-size: 1.5rem; font-weight: 700; color: #9E8454; margin-bottom: 6px;">Ресторан "Олигарх"</p>
             <p style="font-size: 1.15rem; font-style: italic; margin-bottom: 12px; color:#4A5568;">г. Ош, микрорайон Анар, 1а</p>
             <p style="font-size: 1.1rem; margin-bottom: 20px; font-style: italic; color: #2A2F35; font-weight: 600;">31 июля 2026 года в 17:00</p>
-            <a href="https://2gis.kg/osh/search/%D0%9E%D0%BB%D0%B8%D0%B3%D0%B0%D1%80%D1%85" target="_blank" class="btn-nav" style="display:inline-block; margin-bottom:30px;">Открыть карту 2ГИС 📍</a>
-
-            <h2>Дресс-код</h2>
-            <p style="font-style: italic; font-size: 1.1rem; color:#4A5568; line-height: 1.6;">Мы будем очень благодарны, если вы поддержите праздничную атмосферу вечера и выберете элегантные наряды в изысканной цветовой гамме:</p>
-            
-            <div class="palette">
-                <div class="circle" style="background:#1A252F;"></div>
-                <div class="circle" style="background:#4A5568;"></div>
-                <div class="circle" style="background:#D4AF37;"></div>
-                <div class="circle" style="background:#E2E8F0;"></div>
-                <div class="circle" style="background:#FFFFFF;"></div>
-            </div>
+            <a href="https://2gis.kg/osh/search/%D0%9E%D0%BB%D0%B8%D0%B3%D0%B0%D1%80%D1%85" target="_blank" class="btn-nav" style="display:inline-block; margin-bottom:10px;">Открыть карту 2ГИС 📍</a>
 
             <div class="nav-box">
                 <button class="btn-nav" onclick="navigateToPage(2)">Назад</button>
@@ -379,8 +362,7 @@
             <button onclick="saveWish()" class="btn-nav" style="width:100%; background:#9E8454; color:#fff;">Оставить пожелание</button>
             
             <div class="wishes-output" id="output-box">
-                <div class="wish-item"><strong>Арстан и Нурайым:</strong> Счастья, крепкой любви и долгих совместных лет жизни молодым! Рады видеть каждого гостя!</div>
-            </div>
+                </div>
 
             <div class="nav-box">
                 <button class="btn-nav" onclick="navigateToPage(4)">Назад</button>
@@ -392,17 +374,20 @@
         let isMusicPlaying = false;
         const audioPlayer = document.getElementById('wedding-audio');
 
-        // Автоматический перенос имени из GET-параметра (?name=Имя)
-        window.onload = function() {
+        // Прямая стабильная ссылка на песню HammAli & Navai - Люби меня
+        const mp3Url = "https://thegmusic.com/uploads/files/2024-04/hammali-navai-lyubi-menya.mp3";
+
+        // Функция автоматического получения имени из URL ссылки
+        function loadGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('name')) {
-                const guestName = urlParams.get('name');
-                const nameInput = document.getElementById('guest-name-input');
-                const authorInput = document.getElementById('author');
-                if(nameInput) nameInput.value = guestName;
-                if(authorInput) authorInput.value = guestName; 
+            const guestName = urlParams.get('name') || urlParams.get('to');
+            if (guestName) {
+                document.getElementById('guest-title-heading').innerText = guestName;
             }
-        };
+        }
+
+        // Вызов обработки имени при загрузке документа
+        window.addEventListener('DOMContentLoaded', loadGuestName);
 
         function openEnvelope(event) {
             if(event) event.stopPropagation(); 
@@ -435,24 +420,29 @@
                 setTimeout(() => p.remove(), 2100);
             }
 
-            // ШАГ 1. СНАЧАЛА МГНОВЕННО ОТКРЫВАЕМ ОКНО
             screen.style.opacity = '0';
             screen.style.transform = 'scale(1.03)';
             
+            if (!audioPlayer.src || audioPlayer.src === "") {
+                audioPlayer.src = mp3Url;
+            }
+
+            // Автоматический запуск трека после открытия конверта
+            if (!isMusicPlaying) {
+                audioPlayer.play().then(() => {
+                    isMusicPlaying = true;
+                    document.getElementById('music-status-text').innerText = "Музыка играет";
+                    document.getElementById('music-icon').innerText = "🎵";
+                }).catch(e => {
+                    console.log("Политика браузера требует ручного клика по панели.");
+                });
+            }
+
             setTimeout(() => {
                 screen.style.display = 'none';
                 navigateToPage(1); 
                 startPetalsFalling(); 
-            }, 400);
-
-            // ШАГ 2. МУЗЫКА ИДЕТ ПАРАЛЛЕЛЬНО И НЕ МЕШАЕТ ИНТЕРФЕЙСУ
-            audioPlayer.play().then(() => {
-                isMusicPlaying = true;
-                document.getElementById('music-status-text').innerText = "Музыка играет";
-                document.getElementById('music-icon').innerText = "🎵";
-            }).catch(e => {
-                console.log("Браузер ожидает ручного клика по верхней плашке.");
-            });
+            }, 500);
         }
 
         function navigateToPage(num) {
@@ -468,6 +458,10 @@
         function toggleAudio(event) {
             if(event) event.stopPropagation(); 
             
+            if (!audioPlayer.src || audioPlayer.src === "") {
+                audioPlayer.src = mp3Url;
+            }
+            
             let statusText = document.getElementById('music-status-text');
             let icon = document.getElementById('music-icon');
             
@@ -482,7 +476,7 @@
                     statusText.innerText = "Музыка играет";
                     icon.innerText = "🎵";
                 }).catch(err => {
-                    alert("Пожалуйста, нажмите на плашку музыки ещё раз.");
+                    alert("Пожалуйста, нажмите на значок музыки ещё раз.");
                 });
             }
         }
