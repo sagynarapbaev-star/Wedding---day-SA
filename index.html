@@ -10,12 +10,8 @@
         
         body, html {
             height: 100%;
-            /* ЭКСКЛЮЗИВНЫЙ ФОН: ЭФФЕКТ ДОРОГОЙ ТЕКСТУРНОЙ БУМАГИ ВЕРЖЕ */
-            background-color: #FAF9F6;
-            background-image: 
-                linear-gradient(90deg, rgba(158, 132, 84, 0.02) 1px, transparent 1px),
-                linear-gradient(rgba(158, 132, 84, 0.02) 1px, transparent 1px);
-            background-size: 3px 3px;
+            /* РОСКОШНЫЙ ЧУВСТВЕННЫЙ ФОН: НЕЖНАЯ ШАМПАНЬ И ПУДРОВАЯ РОЗА */
+            background: linear-gradient(135deg, #FFF9F2 0%, #FFE9EC 50%, #FFF3E3 100%);
             background-attachment: fixed;
             color: #2A2F35;
             font-family: 'Cormorant Garamond', serif;
@@ -23,52 +19,74 @@
             position: relative;
         }
 
-        /* ЧУВСТВЕННЫЙ И РОСКОШНЫЙ СТИЛЬ ДЛЯ ПАРЫ */
-        .couple-names-style {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: #b38e5d;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
-            margin: 20px 0;
-            display: block;
-            letter-spacing: 0px;
-            line-height: 1.1;
-        }
-        .couple-ampersand {
-            font-size: 2.8rem;
-            color: #d4af37;
-            display: block;
-            margin: 5px 0;
-            opacity: 0.8;
-        }
-
-        /* СТРОГИЙ, БЛАГОРОДНЫЙ И УВАЖИТЕЛЬНЫЙ СТИЛЬ ДЛЯ РОДИТЕЛЕЙ */
-        .parents-names-style {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #2A2F35;
-            letter-spacing: 1px;
-            margin: 6px 0 2px 0;
-            text-transform: none;
-            display: block;
-        }
-
-        /* ГУСТОЙ И КРАСИВЫЙ ЛИСТОПАД ЛЕПЕСТКОВ (УВЕЛИЧЕНО В 2 РАЗА) */
+        /* РЕАЛИСТИЧНЫЕ ЛЕПЕСТКИ РОЗ (НЕ ШАРИКИ) */
         .rose-petal {
             position: fixed;
             top: -20px;
             pointer-events: none;
             z-index: 1;
-            background: radial-gradient(circle at 40% 40%, #ffccd5, #ffb3c1 60%, #ff4d6d);
-            border-radius: 15px 0 15px 15px;
-            opacity: 0.6;
+            /* Форма настоящего лепестка */
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758f 40%, #c9184a 100%);
+            border-radius: 70% 30% 70% 40% / 60% 40% 60% 40%;
+            opacity: 0.8;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
             animation: fall linear infinite;
         }
         @keyframes fall {
-            0% { top: -20px; transform: translateX(0) rotate(0deg) scale(0.6); opacity: 0.7; }
-            50% { transform: translateX(60px) rotate(180deg) scale(0.8); opacity: 0.6; }
-            100% { top: 105vh; transform: translateX(120px) rotate(360deg) scale(0.5); opacity: 0; }
+            0% { top: -20px; transform: translateX(0) rotate(0deg) scale(0.8); opacity: 0.9; }
+            50% { transform: translateX(80px) rotate(180deg) scale(1.1); opacity: 0.8; }
+            100% { top: 105vh; transform: translateX(140px) rotate(360deg) scale(0.7); opacity: 0; }
+        }
+
+        /* СЕРДЦЕ ВОКРУГ ИМЕН МОЛОДОЖЕНОВ */
+        .heart-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 30px auto;
+            padding: 30px 40px;
+        }
+        .heart-contour {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            stroke: #d4af37;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 1000;
+            animation: drawHeart 4s linear infinite, pulseHeart 2s ease-in-out infinite;
+        }
+        @keyframes drawHeart {
+            0% { stroke-dashoffset: 1000; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* ЧУВСТВЕННЫЙ СТИЛЬ ДЛЯ ПАРЫ */
+        .couple-names-style {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            color: #b38e5d;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            line-height: 1.1;
+        }
+        .couple-ampersand {
+            font-size: 2.5rem;
+            color: #d4af37;
+            display: block;
+            margin: 5px 0;
+        }
+
+        /* КРАСИВОЕ И РОСКОШНОЕ ОФОРМЛЕНИЕ ИМЕН РОДИТЕЛЕЙ */
+        .parents-names-style {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            font-weight: normal;
+            color: #bc9356;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            margin: 5px 0;
+            display: block;
         }
 
         /* ЭФФЕКТ СЕРДЕЧЕК ПРИ ОТКРЫТИИ */
@@ -87,7 +105,7 @@
         #envelope-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #EADEC9 0%, #D6C7B1 50%, #BFA785 100%);
+            background: linear-gradient(135deg, #F5E6CC 0%, #E8D3B5 50%, #CFA87B 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -217,34 +235,36 @@
             max-width: 520px;
             margin: auto;
             padding: 40px 25px;
-            background: rgba(255, 255, 255, 0.98);
-            border: 1px solid rgba(158, 132, 84, 0.2);
-            box-shadow: 0 20px 60px rgba(158, 132, 84, 0.08);
-            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 20px 50px rgba(158, 132, 84, 0.1);
+            border-radius: 12px;
             position: relative;
             z-index: 10;
+            backdrop-filter: blur(5px);
         }
         .content-card::after {
             content: '';
             position: absolute;
-            top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 1px solid rgba(158, 132, 84, 0.13);
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(158, 132, 84, 0.15);
+            border-radius: 8px;
             pointer-events: none;
         }
 
-        h2 { font-size: 1.6rem; color: #9E8454; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
+        h2 { font-size: 1.7rem; color: #9E8454; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
         
         .invitation-text {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             line-height: 1.75;
             font-style: italic;
             color: #3A4047;
             margin-bottom: 15px;
         }
 
-        .hosts-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #9E8454; font-weight: 600; margin-bottom: 4px; }
-        .hosts-status { font-size: 0.9rem; font-style: italic; color: #8A8475; }
-        .hosts-block { margin-bottom: 14px; }
+        .hosts-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #8A8475; font-weight: 600; margin-bottom: 2px; }
+        .hosts-status { font-size: 0.95rem; font-style: italic; color: #7A828A; }
+        .hosts-block { margin-bottom: 10px; }
 
         /* НАВИГАЦИЯ */
         .nav-box { display: flex; justify-content: center; gap: 12px; margin-top: 30px; width: 100%; position: relative; z-index: 20; }
@@ -261,74 +281,49 @@
             transition: all 0.3s ease;
             text-decoration: none;
             font-weight: 500;
+            border-radius: 4px;
         }
         .btn-nav:hover { background: #9E8454; color: #FFFFFF; box-shadow: 0 5px 15px rgba(158, 132, 84, 0.15); }
 
         /* ТАЙМЕР */
         .timer-grid { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
-        .timer-item { background: #FFFFFF; border: 1px solid #EAE5DC; padding: 10px; min-width: 68px; }
+        .timer-item { background: #FFFFFF; border: 1px solid #EAE5DC; padding: 10px; min-width: 68px; border-radius: 6px; }
         .timer-num { font-size: 1.5rem; color: #2A2F35; font-weight: 600; }
         .timer-label { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; color: #8A94A0; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* КРАСИВАЯ ПРОГРАММА ВЕЧЕРА */
-        .timeline-container {
-            text-align: left;
-            margin: 15px auto 5px auto;
-            max-width: 440px;
+        /* ИЗЫСКАННАЯ СТРАНИЦА ПОЖЕЛАНИЙ */
+        .wish-input, .wish-text { 
+            width: 100%; padding: 14px; margin-bottom: 12px; 
+            border: 1px solid rgba(158, 132, 84, 0.25); 
+            background: rgba(255, 255, 255, 0.7); 
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem; 
+            outline: none; border-radius: 6px;
+            transition: all 0.3s ease;
         }
-        .timeline-item {
-            display: flex;
-            margin-bottom: 16px;
-            align-items: flex-start;
+        .wish-input:focus, .wish-text:focus {
+            border-color: #9E8454;
+            background: #FFFFFF;
+            box-shadow: 0 0 10px rgba(158, 132, 84, 0.1);
         }
-        .timeline-time {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #9E8454;
-            min-width: 55px;
-            padding-top: 3px;
-        }
-        .timeline-dot {
-            margin: 0 14px;
-            font-size: 1.1rem;
-            line-height: 1;
-        }
-        .timeline-text {
-            font-size: 1.15rem;
-            color: #333;
-            line-height: 1.4;
+        .wish-text { height: 90px; resize: none; }
+        .wishes-output { max-height: 180px; overflow-y: auto; text-align: left; font-size: 0.95rem; margin-top: 20px; padding-right: 5px; }
+        
+        .wish-item { 
+            padding: 15px; 
+            border-left: 3px solid #bc9356; 
+            background: linear-gradient(90deg, rgba(252,247,238,0.9) 0%, rgba(255,255,255,0.9) 100%); 
+            margin-bottom: 10px; 
             font-style: italic;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
-
-        /* ДРЕСС-КОД И АДРЕС */
-        .dc-badge {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #9E8454;
-            font-weight: 600;
-            margin: 10px 0 15px 0;
-            display: inline-block;
-            border-bottom: 1px solid #9E8454;
-            padding-bottom: 6px;
-        }
-        .dc-palette {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0 15px 0;
-        }
-        .dc-circle-wrapper { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .dc-circle { width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); }
-        .dc-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; text-transform: uppercase; color: #8A8475; letter-spacing: 1px; }
 
         .address-card-border {
             border: 2px solid #EAE2D5;
             padding: 30px 20px;
             position: relative;
             margin: 15px 0 25px 0;
+            border-radius: 6px;
         }
         .address-card-border::after {
             content: '✨';
@@ -341,16 +336,10 @@
             color: #9E8454;
         }
 
-        /* КНИГА ПОЖЕЛАНИЙ */
-        .wish-input, .wish-text { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #E2DCD0; background: #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; outline: none; }
-        .wish-text { height: 75px; resize: none; }
-        .wishes-output { max-height: 130px; overflow-y: auto; text-align: left; font-size: 0.9rem; margin-top: 15px; }
-        .wish-item { padding: 10px; border-left: 2px solid #9E8454; background: #FAFAFA; margin-bottom: 6px; font-style: italic; }
-
         /* ГАЛЕРЕЯ */
-        .upload-zone { border: 1px dashed #9E8454; padding: 20px 15px; cursor: pointer; background: #FFFFFF; margin-bottom: 15px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #7A7469; }
+        .upload-zone { border: 1px dashed #9E8454; padding: 20px 15px; cursor: pointer; background: #FFFFFF; margin-bottom: 15px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #7A7469; border-radius: 6px; }
         .gallery-preview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
-        .gallery-preview img { width: 100%; height: 70px; object-fit: cover; border-radius: 2px; }
+        .gallery-preview img { width: 100%; height: 70px; object-fit: cover; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -387,15 +376,15 @@
             
             <p class="invitation-text" style="font-weight: 700; color:#9E8454; margin-bottom: 12px; font-size: 1.3rem;">Дорогие наши родные и уважаемые гости!</p>
             <p class="invitation-text">С огромной радостью приглашаем Вас разделить с нами один из самых счастливых дней нашей семьи — торжество в честь бракосочетания Сагына и Айнуру.</p>
-            <p class="invitation-text">Ваше присутствие, добрые напутствия и улыбки станут для молодых самым прекрасным подарком в день создания их новой семьи. Будем искренне рады встрече!</p>
+            <p class="invitation-text">Ваше присутствие, добрые напутствия и улыбки станут для молодых самым прекрасным подарком. Будем искренне рады встрече!</p>
             
-            <div class="hosts-container" style="margin-top: 25px;">
+            <div class="hosts-container" style="margin-top: 20px;">
                 <div class="hosts-block">
                     <div class="hosts-title">Хозяева торжества</div>
                     <span class="parents-names-style">Арстан & Нурайым</span>
                     <div class="hosts-status">(Родители жениха)</div>
                 </div>
-                <div class="hosts-block" style="margin-top: 15px;">
+                <div class="hosts-block" style="margin-top: 10px;">
                     <span class="parents-names-style">Муктарбек & Шаарбу</span>
                     <div class="hosts-status">(Родители невесты)</div>
                 </div>
@@ -410,14 +399,18 @@
     <div id="page2" class="page">
         <div class="content-card">
             <h2>Слово молодожёнов</h2>
-            <p class="invitation-text" style="line-height: 1.8; font-size: 1.25rem; margin-top: 20px;">В жизни каждого человека бывают моменты, когда весь мир сужается до улыбки одного-единственного человека. Мы нашли это невероятное счастье друг в другe.</p>
-            <p class="invitation-text" style="line-height: 1.8; font-size: 1.25rem;">И перед тем как сделать этот самый важный шаг в нашу совместную историю, мы хотим искренне поблагодарить тех, кто был рядом, и пригласить вас стать свидетелями нашего союза.</p>
+            <p class="invitation-text" style="line-height: 1.8; font-size: 1.2rem; margin-top: 15px;">В жизни каждого человека бывают моменты, когда весь мир сужается до улыбки одного-единственного человека. Мы нашли это невероятное счастье друг в другe.</p>
             
-            <span class="couple-names-style">
-                Сагын 
-                <span class="couple-ampersand">&</span> 
-                Айнуру
-            </span>
+            <div class="heart-wrapper">
+                <svg class="heart-contour" viewBox="0 0 100 90">
+                    <path d="M50,15 C50,15 38,0 20,0 C8,0 0,10 0,22 C0,45 25,65 50,85 C75,65 100,45 100,22 C100,10 92,0 80,0 C62,0 50,15 50,15 Z"/>
+                </svg>
+                <div class="couple-names-style">
+                    Сагын <span class="couple-ampersand">&</span> Айнуру
+                </div>
+            </div>
+            
+            <p class="invitation-text" style="line-height: 1.8; font-size: 1.2rem;">Приглашаем вас стать свидетелями начала нашей большой совместной истории!</p>
             
             <div class="nav-box">
                 <button class="btn-nav" onclick="navigateToPage(1)">Назад</button>
@@ -428,22 +421,10 @@
 
     <div id="page3" class="page">
         <div class="content-card">
-            <h2>Программа вечера</h2>
-            <p style="font-style: italic; font-size: 1.05rem; color: #7A828A; margin-bottom: 25px;">Тайминг нашего праздничного дня:</p>
+            <h2>Пожелания к стилю</h2>
+            <p class="invitation-text" style="font-size: 1.25rem; font-weight: 600; color: #9E8454; margin-top: 20px;">Дресс-код торжества</p>
+            <p class="invitation-text" style="line-height: 1.8; font-size: 1.2rem; margin-bottom: 25px;">Мы очень хотим, чтобы наш праздник был наполнен гармонией и красотой. Будем искренне признательны, если вы поддержите атмосферу вечера и выберете элегантные наряды в изысканной вечерней цветовой гамме.</p>
             
-            <div class="timeline-container">
-                <div class="timeline-item"><div class="timeline-time">17:00</div><div class="timeline-dot">🥂</div><div class="timeline-text">Сбор дорогих гостей, приветственный коктейль</div></div>
-                <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-dot">✨</div><div class="timeline-text">Торжественное начало праздника</div></div>
-                <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-dot">👑</div><div class="timeline-text">Торжественное появление молодожёнов</div></div>
-                <div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-dot">🎙️</div><div class="timeline-text">Благословение и напутствия от хозяев вечера</div></div>
-                <div class="timeline-item"><div class="timeline-time">19:00</div><div class="timeline-dot">🍽️</div><div class="timeline-text">Званый гастрономический ужин</div></div>
-                <div class="timeline-item"><div class="timeline-time">19:30</div><div class="timeline-dot">🎵</div><div class="timeline-text">Музыкальная пауза и антракт</div></div>
-                <div class="timeline-item"><div class="timeline-time">20:30</div><div class="timeline-dot">💝</div><div class="timeline-text">Искренние поздравления молодожёнов гостями</div></div>
-                <div class="timeline-item"><div class="timeline-time">21:00</div><div class="timeline-dot">🎉</div><div class="timeline-text">Увлекательная шоу-программа и конкурсы</div></div>
-                <div class="timeline-item"><div class="timeline-time">21:20</div><div class="timeline-dot">💃</div><div class="timeline-text">Танцевальный антракт</div></div>
-                <div class="timeline-item"><div class="timeline-time">22:00</div><div class="timeline-dot">🌙</div><div class="timeline-text">Торжественный финал вечера и проводы молодых</div></div>
-            </div>
-
             <div class="nav-box">
                 <button class="btn-nav" onclick="navigateToPage(2)">Назад</button>
                 <button class="btn-nav" onclick="navigateToPage(4)">Далее</button>
@@ -453,18 +434,16 @@
 
     <div id="page4" class="page">
         <div class="content-card">
-            <h2>Пожелания к стилю</h2>
-            <div class="dc-badge">Дресс-код торжества</div>
+            <h2>Место проведения</h2>
             
-            <p class="invitation-text" style="font-size: 1.15rem; font-weight: 500; font-style: normal; color: #2A2F35; margin-top: 15px;">Будем рады видеть вас в элегантных вечерних платьях и классических костюмах в изысканной цветовой гамме:</p>
-            
-            <div class="dc-palette">
-                <div class="dc-circle-wrapper"><div class="dc-circle" style="background-color: #1A202C;"></div><div class="dc-label">Black</div></div>
-                <div class="dc-circle-wrapper"><div class="dc-circle" style="background-color: #4A5568;"></div><div class="dc-label">Slate</div></div>
-                <div class="dc-circle-wrapper"><div class="dc-circle" style="background-color: #D4AF37;"></div><div class="dc-label">Gold</div></div>
-                <div class="dc-circle-wrapper"><div class="dc-circle" style="background-color: #E2E8F0;"></div><div class="dc-label">Silver</div></div>
-                <div class="dc-circle-wrapper"><div class="dc-circle" style="background-color: #FFFFFF; border: 1px solid #CBD5E0;"></div><div class="dc-label">White</div></div>
+            <div class="address-card-border">
+                <p style="font-size: 1.6rem; font-weight: 700; color: #9E8454; margin-bottom: 8px; letter-spacing: 1px;">Ресторан "Олигарх"</p>
+                <p style="font-size: 1.2rem; font-style: italic; margin-bottom: 15px; color:#4A5568;">г. Ош, микрорайон Анар, 1а</p>
+                <div style="width: 40px; height: 1px; background: #D4AF37; margin: 0 auto 15px auto;"></div>
+                <p style="font-size: 1.25rem; font-style: normal; color: #2A2F35; font-weight: 600;">31 июля 2026 года в 17:00</p>
             </div>
+
+            <a href="https://2gis.kg/osh/search/%D0%9E%D0%BB%D0%B8%D0%B3%D0%B0%D1%80%D1%85" target="_blank" class="btn-nav" style="display:inline-block; margin-bottom:10px;">Открыть карту 2ГИС 📍</a>
 
             <div class="nav-box">
                 <button class="btn-nav" onclick="navigateToPage(3)">Назад</button>
@@ -475,26 +454,6 @@
 
     <div id="page5" class="page">
         <div class="content-card">
-            <h2>Место проведения</h2>
-            
-            <div class="address-card-border">
-                <p style="font-size: 1.55rem; font-weight: 700; color: #9E8454; margin-bottom: 8px; letter-spacing: 1px;">Ресторан "Олигарх"</p>
-                <p style="font-size: 1.15rem; font-style: italic; margin-bottom: 15px; color:#4A5568;">г. Ош, микрорайон Анар, 1а</p>
-                <div style="width: 40px; height: 1px; background: #D4AF37; margin: 0 auto 15px auto;"></div>
-                <p style="font-size: 1.2rem; font-style: normal; color: #2A2F35; font-weight: 600;">31 июля 2026 года в 17:00</p>
-            </div>
-
-            <a href="https://2gis.kg/osh/search/%D0%9E%D0%BB%D0%B8%D0%B3%D0%B0%D1%80%D1%85" target="_blank" class="btn-nav" style="display:inline-block; margin-bottom:10px;">Открыть карту 2ГИС 📍</a>
-
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(4)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(6)">Далее</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="page6" class="page">
-        <div class="content-card">
             <h2>До торжества осталось</h2>
             <div class="timer-grid">
                 <div class="timer-item"><div class="timer-num" id="days">00</div><div class="timer-label">Дней</div></div>
@@ -503,7 +462,7 @@
                 <div class="timer-item"><div class="timer-num" id="seconds">00</div><div class="timer-label">Сек</div></div>
             </div>
 
-            <h2 style="margin-top: 35px;">Поделитесь кадрами</h2>
+            <h2 style="margin-top: 30px;">Поделитесь кадрами</h2>
             <p style="font-style: italic; font-size: 1.05rem; color: #555; margin-bottom: 15px;">Сюда вы сможете загрузить фотографии с нашей свадьбы!</p>
             
             <div class="upload-zone" onclick="document.getElementById('file-input').click()">
@@ -514,25 +473,25 @@
             <div class="gallery-preview" id="gallery-box"></div>
 
             <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(5)">Назад</button>
-                <button class="btn-nav" onclick="navigateToPage(7)">Далее</button>
+                <button class="btn-nav" onclick="navigateToPage(4)">Назад</button>
+                <button class="btn-nav" onclick="navigateToPage(6)">Далее</button>
             </div>
         </div>
     </div>
 
-    <div id="page7" class="page">
+    <div id="page6" class="page">
         <div class="content-card">
             <h2>Книга пожеланий</h2>
-            <p style="font-style: italic; font-size:1.1rem; color:#555; margin-bottom:15px;">Оставьте свои тёплые слова для Сагына и Айнуру:</p>
+            <p style="font-style: italic; font-size:1.1rem; color:#555; margin-bottom:20px;">Нам будет невероятно приятно прочесть ваши тёплые слова и напутствия:</p>
             
             <input type="text" id="author" class="wish-input" placeholder="Ваше Имя">
-            <textarea id="text" class="wish-text" placeholder="Ваши изысканные пожелания молодым..."></textarea>
-            <button onclick="saveWish()" class="btn-nav" style="width:100%; background:#9E8454; color:#fff;">Оставить пожелание</button>
+            <textarea id="text" class="wish-text" placeholder="Ваши искренние и нежные пожелания молодым..."></textarea>
+            <button onclick="saveWish()" class="btn-nav" style="width:100%; background:#9E8454; color:#fff;">Отправить пожелание ✨</button>
             
             <div class="wishes-output" id="output-box"></div>
 
             <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(6)">Назад</button>
+                <button class="btn-nav" onclick="navigateToPage(5)">Назад</button>
             </div>
         </div>
     </div>
@@ -553,14 +512,13 @@
 
         function openEnvelope(event) {
             if(event) event.stopPropagation(); 
-            
             let screen = document.getElementById('envelope-screen');
             if (!screen) return;
 
             let centerX = window.innerWidth / 2;
             let centerY = window.innerHeight / 2;
 
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 35; i++) {
                 let p = document.createElement('div');
                 p.className = 'heart-particle';
                 let size = Math.random() * 14 + 12;
@@ -599,9 +557,7 @@
         }
 
         function navigateToPage(num) {
-            document.querySelectorAll('.page').forEach(p => {
-                p.classList.remove('active');
-            });
+            document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); });
             let activePage = document.getElementById('page' + num);
             if (activePage) {
                 activePage.classList.add('active');
@@ -611,9 +567,7 @@
 
         function toggleAudio(event) {
             if(event) event.stopPropagation(); 
-            if (!audioPlayer.src || audioPlayer.src === "") {
-                audioPlayer.src = mp3Url;
-            }
+            if (!audioPlayer.src || audioPlayer.src === "") { audioPlayer.src = mp3Url; }
             let statusText = document.getElementById('music-status-text');
             let icon = document.getElementById('music-icon');
             if (isMusicPlaying) {
@@ -659,17 +613,21 @@
             }
         }
 
-        // ЗАПУСК ЛЕПЕСТКОВ (УВЕЛИЧЕНО В 2 РАЗА ДЛЯ КРАСИВОГО ЖИВОГО ЭФФЕКТА)
+        // КРАСИВЫЙ, ЖИВОЙ И ЗАМЕТНЫЙ ЛИСТОПАД НАСТОЯЩИХ ЛЕПЕСТКОВ РОЗ
         function startPetalsFalling() {
             setInterval(() => {
                 let petal = document.createElement('div');
                 petal.className = 'rose-petal';
                 petal.style.left = Math.random() * window.innerWidth + 'px';
-                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
-                petal.style.width = petal.style.height = (Math.random() * 6 + 8) + 'px';
+                petal.style.animationDuration = (Math.random() * 4 + 5) + 's';
+                // Вариативность размеров для объемности
+                let sizeW = Math.random() * 12 + 16;
+                let sizeH = sizeW * 1.2;
+                petal.style.width = sizeW + 'px';
+                petal.style.height = sizeH + 'px';
                 document.body.appendChild(petal);
-                setTimeout(() => petal.remove(), 7000);
-            }, 350); 
+                setTimeout(() => petal.remove(), 8000);
+            }, 250); // Увеличена интенсивность появления
         }
 
         const weddingDate = new Date('July 31, 2026 17:00:00').getTime();
