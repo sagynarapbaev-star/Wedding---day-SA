@@ -24,9 +24,12 @@
         .envelope {
             width: 440px; height: 280px; max-width: 92%; background: #FFFFFF; box-shadow: 0 35px 85px rgba(0,0,0,0.2);
             border-radius: 8px; border: 1px solid #EAE2D5; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;
+            box-sizing: border-box;
         }
+        /* Исправленная рамка внутри конверта */
         .envelope::before {
-            content: ''; position: absolute; top: 14px; left: 14px; right: 14px; bottom: 14px; border: 1px solid rgba(212, 175, 55, 0.3); pointer-events: none;
+            content: ''; position: absolute; top: 14px; left: 14px; width: calc(100% - 28px); height: calc(100% - 28px); border: 1px solid rgba(212, 175, 55, 0.3); pointer-events: none;
+            box-sizing: border-box;
         }
         
         /* НАДЕЖНАЯ ПЕЧАТЬ БЕЗ SVG */
@@ -55,7 +58,7 @@
         .music-bar-text { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #9E8454; font-weight: 600; }
         
         /* СТРАНИЦЫ И КАРТОЧКИ */
-        .page { display: none; width: 100%; min-height: 100vh; padding: 90px 20px 40px 20px; text-align: center; justify-content: center; align-items: center; flex-direction: column; }
+        .page { display: none; width: 100%; min-height: 100vh; padding: 90px 20px 40px 20px; text-align: center; justify-content: center; align-items: center; flex-direction: column; position: relative; z-index: 2; }
         .page.active { display: flex; }
         .content-card {
             width: 100%; max-width: 500px; padding: 35px 20px; background: #FFFFFF;
@@ -211,77 +214,4 @@
             <div class="timer-grid">
                 <div class="timer-item"><div class="timer-num" id="days">00</div><div class="timer-label">Дней</div></div>
                 <div class="timer-item"><div class="timer-num" id="hours">00</div><div class="timer-label">Часов</div></div>
-                <div class="timer-item"><div class="timer-num" id="minutes">00</div><div class="timer-label">Мин</div></div>
-                <div class="timer-item"><div class="timer-num" id="seconds">00</div><div class="timer-label">Сек</div></div>
-            </div>
-            <div class="nav-box">
-                <button class="btn-nav" onclick="navigateToPage(5)">Назад</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let isMusicPlaying = false;
-        const audioPlayer = document.getElementById('wedding-audio');
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const guestName = urlParams.get('name') || urlParams.get('to');
-            if (guestName) {
-                document.getElementById('guest-title-heading').innerText = guestName;
-            }
-        });
-
-        function openEnvelope() {
-            document.getElementById('envelope-screen').style.display = 'none';
-            navigateToPage(1);
-            startPetalsFalling();
-
-            audioPlayer.play().then(() => {
-                isMusicPlaying = true;
-                document.getElementById('music-status-text').innerText = "⏸ Пауза";
-            }).catch(() => {
-                document.getElementById('music-status-text').innerText = "▶ Вкл. музыку";
-            });
-        }
-
-        function navigateToPage(num) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            const target = document.getElementById('page' + num);
-            if (target) target.classList.add('active');
-        }
-
-        function toggleAudio() {
-            if (isMusicPlaying) {
-                audioPlayer.pause();
-                isMusicPlaying = false;
-                document.getElementById('music-status-text').innerText = "▶ Вкл. музыку";
-            } else {
-                audioPlayer.play().then(() => {
-                    isMusicPlaying = true;
-                    document.getElementById('music-status-text').innerText = "⏸ Пауза";
-                });
-            }
-        }
-
-        function startPetalsFalling() {
-            setInterval(() => {
-                let petal = document.createElement('div');
-                petal.className = 'rose-petal';
-                petal.style.left = Math.random() * window.innerWidth + 'px';
-                petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                let size = Math.random() * 10 + 10;
-                petal.style.width = size + 'px';
-                petal.style.height = size + 'px';
-                document.body.appendChild(petal);
-                setTimeout(() => petal.remove(), 7000);
-            }, 500);
-        }
-
-        const weddingDate = new Date('July 31, 2026 17:00:00').getTime();
-        setInterval(() => {
-            const diff = weddingDate - new Date().getTime();
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('minutes').innerText = Math.floor((diff % (1
+                <div class="timer-item"><div class="timer-num" id="minutes">00</div><div class="timer-label">
