@@ -15,11 +15,17 @@
             overflow-x: hidden;
         }
         
-        /* ГЛАВНЫЙ ЭКРАН С КОНВЕРТОМ */
+        /* ГЛАВНЫЙ ЭКРАН С КОНВЕРТОМ — ТЕПЕРЬ НА САМОМ ВЕРХУ */
         #envelope-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #F5E6CC 0%, #E8D3B5 50%, #CFA87B 100%);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; cursor: pointer;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 999999 !important; /* Максимальный приоритет на десктопе */
+            cursor: pointer;
         }
         
         .envelope {
@@ -80,15 +86,17 @@
             100% { transform: scale(1); }
         }
         
-        .seal-heart { font-size: 1.6rem; line-height: 1; margin-bottom: 2px; display: block; }
-        .seal-text { color: #FFFDF9; font-family: 'Great Vibes', cursive, serif; font-size: 1.3rem; font-weight: bold; line-height: 1; display: block; text-align: center; }
-        .envelope-text { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #7A7465; font-weight: 600; margin-top: 25px; text-align: center; display: block; width: 100%; }
+        .seal-heart { font-size: 1.6rem; line-height: 1; margin-bottom: 2px; display: block; pointer-events: none; }
+        .seal-text { color: #FFFDF9; font-family: 'Great Vibes', cursive, serif; font-size: 1.3rem; font-weight: bold; line-height: 1; display: block; text-align: center; pointer-events: none; }
+        .envelope-text { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #7A7465; font-weight: 600; margin-top: 25px; text-align: center; display: block; width: 100%; pointer-events: none; }
         
-        /* МУЗЫКАЛЬНАЯ ПАНЕЛЬ */
+        /* МУЗЫКАЛЬНАЯ ПАНЕЛЬ — СТРОГО СКРЫТА ИЗНАЧАЛЬНО */
         #cozy-music-bar {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.95); border: 1px solid #9E8454;
-            padding: 8px 20px; border-radius: 30px; display: none; align-items: center; gap: 10px;
+            padding: 8px 20px; border-radius: 30px; 
+            display: none !important; /* Полное исключение помех до клика */
+            align-items: center; gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 100000; cursor: pointer;
         }
         .music-bar-text { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #9E8454; font-weight: 600; }
@@ -118,4 +126,241 @@
         /* ПРОГРАММА ВЕЧЕРА */
         .timeline-container { text-align: left; margin: 15px auto; max-width: 400px; }
         .timeline-item { display: flex; margin-bottom: 14px; font-size: 1.1rem; }
-        .timeline-time { font-family: 'Montserrat', sans-serif; font-
+        .timeline-time { font-family: 'Montserrat', sans-serif; font-weight: 600; color: #9E8454; min-width: 60px; }
+        .timeline-text { font-style: italic; margin-left: 15px; }
+        
+        /* ДРЕСС КОД */
+        .dc-style-box { background: #FFFDF9; border: 1px dashed #9E8454; padding: 15px; border-radius: 8px; text-align: left; margin-top: 10px; }
+        .dc-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; color: #9E8454; font-weight: 600; margin-top: 8px; }
+        
+        /* ТАЙМЕР */
+        .timer-grid { display: flex; justify-content: center; gap: 8px; margin: 20px 0; }
+        .timer-item { background: #FFFDF9; border: 1px solid #EAE5DC; padding: 8px; min-width: 60px; border-radius: 6px; }
+        .timer-num { font-size: 1.4rem; font-weight: 600; color: #9E8454; }
+        .timer-label { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; color: #8A94A0; text-transform: uppercase; }
+        
+        /* КНОПКИ */
+        .nav-box { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
+        .btn-nav { padding: 10px 22px; background: #FFFFFF; border: 1px solid #9E8454; color: #9E8454; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border-radius: 4px; text-decoration: none; display: inline-block; }
+        .btn-nav:hover { background: #9E8454; color: #FFFFFF; }
+        
+        /* ПАДАЮЩИЕ ЛЕПЕСТКИ */
+        .rose-petal { position: fixed; top: -20px; pointer-events: none; z-index: 1; background: #ff758f; border-radius: 50%; opacity: 0.7; animation: fall linear infinite; }
+        @keyframes fall { 0% { top: -20px; transform: translateX(0) rotate(0deg); opacity: 0.8; } 100% { top: 105vh; transform: translateX(100px) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <audio id="wedding-audio" src="music.mp3" loop preload="auto"></audio>
+
+    <div id="cozy-music-bar" onclick="toggleAudio(event)">
+        <span class="music-bar-text" id="music-status-text">🎵 Музыка</span>
+    </div>
+
+    <div id="envelope-screen" onclick="openEnvelope()">
+        <div class="envelope" onclick="openEnvelope()">
+            <div class="envelope-content" onclick="openEnvelope()">
+                <div class="seal-circle" onclick="openEnvelope()">
+                    <span class="seal-heart">❤️</span>
+                    <span class="seal-text">S & A</span>
+                </div>
+                <div class="envelope-text" onclick="openEnvelope()">Нажмите, чтобы открыть</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page1" class="page">
+        <div class="content-card">
+            <h2 id="guest-title-heading">Дорогой Гость</h2>
+            <p class="invitation-text" style="font-weight:700; color:#9E8454;">Уважаемые гости!</p>
+            <p class="invitation-text">С огромной радостью приглашаем Вас разделить с нами один из самых счастливых дней — торжество в честь свадьбы Сагына и Айнуру.</p>
+            
+            <div style="margin-top: 15px;">
+                <div class="hosts-title">Хозяева торжества</div>
+                <span class="parents-names-style">Арстанбек & Нурайым</span>
+                <div class="hosts-status">(Родители жениха)</div>
+                <span class="parents-names-style" style="margin-top:10px;">Муктарбек & Шаарбу</span>
+                <div class="hosts-status">(Родители невесты)</div>
+            </div>
+            <div class="nav-box">
+                <button class="btn-nav" onclick="navigateToPage(2)">Далее</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="content-card">
+            <h2>Молодожёны</h2>
+            <p class="invitation-text">Мы нашли наше невероятное счастье друг в другe.</p>
+            
+            <div class="heart-box">
+                <div class="heart-inside-text">
+                    Сагын<br><span style="font-size:1.2rem;color:#bc9356;">&</span><br>Айнуру
+                </div>
+            </div>
+            
+            <p class="invitation-text">Приглашаем вас стать свидетелями начала нашей истории!</p>
+            <div class="nav-box">
+                <button class="btn-nav" onclick="navigateToPage(1)">Назад</button>
+                <button class="btn-nav" onclick="navigateToPage(3)">Далее</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <div class="content-card">
+            <h2>Программа дня</h2>
+            <div class="timeline-container">
+                <div class="timeline-item"><div class="timeline-time">17:00</div><div class="timeline-text">Сбор гостей</div></div>
+                <div class="timeline-item"><div class="timeline-time">17:30</div><div class="timeline-text">Начало торжества</div></div>
+                <div class="timeline-item"><div class="timeline-time">18:00</div><div class="timeline-text">Выход молодожёнов</div></div>
+                <div class="timeline-item"><div class="timeline-time">18:30</div><div class="timeline-text">Поздравления родителей</div></div>
+                <div class="timeline-item"><div class="timeline-time">19:00</div><div class="timeline-text">Праздничный ужин</div></div>
+            </div>
+            <div class="nav-box">
+                <button class="btn-nav" onclick="navigateToPage(2)">Назад</button>
+                <button class="btn-nav" onclick="navigateToPage(4)">Далее</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page4" class="page">
+        <div class="content-card">
+            <h2>Дресс-код</h2>
+            <div class="dc-style-box">
+                <div class="dc-title">Для прекрасных дам</div>
+                <p class="invitation-text" style="font-size:1.1rem; margin-bottom:5px;">Полуклассический стиль: вечерние или коктейльные платья</p>
+                <div class="dc-title">Для мужчин</div>
+                <p class="invitation-text" style="font-size:1.1rem; margin-bottom:0;">Полуклассический стиль: костюмы, пиджаки или элегантные рубашки</p>
+            </div>
+            <div class="nav-box">
+                <button class="btn-nav" onclick="navigateToPage(3)">Назад</button>
+                <button class="btn-nav" onclick="navigateToPage(5)">Далее</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page5" class="page">
+        <div class="content-card">
+            <h2>Место проведения</h2>
+            <div style="border: 1px solid #9E8454; padding: 20px; margin: 15px 0; border-radius: 6px;">
+                <p style="font-size: 1.5rem; font-weight: 700; color: #9E8454;">Ресторан "Олигарх"</p>
+                <p style="font-size: 1.1rem; font-style: italic; margin: 5px 0 10px 0;">г. Ош, микрорайон Анар, 1а</p>
+                <p style="font-size: 1.2rem; font-weight: 600;">31 июля 2026 года в 17:00</p>
+            </div>
+            <a href="https://2gis.kg/osh/search/%D0%9E%D0%BB%D0%B8%D0%B3%D0%B0%D1%80%D1%85" target="_blank" class="btn-nav">Открыть карту 2ГИС 📍</a>
+            <div class="nav-box">
+                <button class="btn-nav" onclick="navigateToPage(4)">Назад</button>
+                <button class="btn-nav" onclick="navigateToPage(6)">Далее</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page6" class="page">
+        <div class="content-card">
+            <h2>До свадьбы осталось</h2>
+            <div class="timer-grid">
+                <div class="timer-item"><div class="timer-num" id="days">00</div><div class="timer-label">Дней</div></div>
+                <div class="timer-item"><div class="timer-num" id="hours">00</div><div class="timer-label">Часов</div></div>
+                <div class="timer-item"><div class="timer-num" id="minutes">00</div><div class="timer-label">Мин</div></div>
+                <div class="timer-item"><div class="timer-num" id="seconds">00</div><div class="timer-label">Сек</div></div>
+            </div>
+            <div class="nav-box">
+                <button class="btn-nav" onclick="navigateToPage(5)">Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isMusicPlaying = false;
+        const audioPlayer = document.getElementById('wedding-audio');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('name') || urlParams.get('to');
+            if (guestName) {
+                document.getElementById('guest-title-heading').innerText = guestName;
+            }
+        });
+
+        function openEnvelope() {
+            // Принудительно уничтожаем экран заставки
+            const screen = document.getElementById('envelope-screen');
+            if (screen) screen.remove();
+            
+            // Включаем видимость музыкальной панели (меняем с none на flex)
+            const musicBar = document.getElementById('cozy-music-bar');
+            if (musicBar) {
+                musicBar.style.setProperty('display', 'flex', 'important');
+            }
+            
+            // Мгновенный переход на первую страницу
+            navigateToPage(1);
+            startPetalsFalling();
+
+            // Безопасный пуск музыки
+            audioPlayer.play().then(() => {
+                isMusicPlaying = true;
+                document.getElementById('music-status-text').innerText = "⏸ Пауза";
+            }).catch((err) => {
+                console.log("Браузер ожидает ручного клика по музыке.");
+                document.getElementById('music-status-text').innerText = "▶ Вкл. музыку";
+            });
+        }
+
+        function navigateToPage(num) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById('page' + num);
+            if (target) target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleAudio(event) {
+            if (event) event.stopPropagation();
+            if (isMusicPlaying) {
+                audioPlayer.pause();
+                isMusicPlaying = false;
+                document.getElementById('music-status-text').innerText = "▶ Вкл. музыку";
+            } else {
+                audioPlayer.play().then(() => {
+                    isMusicPlaying = true;
+                    document.getElementById('music-status-text').innerText = "⏸ Пауза";
+                }).catch((err) => {
+                    console.log("Ошибка аудио:", err);
+                });
+            }
+        }
+
+        function startPetalsFalling() {
+            setInterval(() => {
+                let petal = document.createElement('div');
+                petal.className = 'rose-petal';
+                petal.style.left = Math.random() * window.innerWidth + 'px';
+                petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                let size = Math.random() * 10 + 10;
+                petal.style.width = size + 'px';
+                petal.style.height = size + 'px';
+                document.body.appendChild(petal);
+                setTimeout(() => petal.remove(), 7000);
+            }, 500);
+        }
+
+        // ТАЙМЕР ОБРАТНОГО ОТСЧЕТА
+        const weddingDate = new Date('July 31, 2026 17:00:00').getTime();
+        setInterval(() => {
+            const diff = weddingDate - new Date().getTime();
+            if (diff > 0) {
+                document.getElementById('days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById('hours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+            } else {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
