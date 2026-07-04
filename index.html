@@ -15,7 +15,7 @@
             overflow-x: hidden;
         }
         
-        /* ГЛАВНЫЙ ЭКРАН С КОНВЕРТОМ — ТЕПЕРЬ НА САМОМ ВЕРХУ */
+        /* ЗАСТАВКА С КОНВЕРТОМ */
         #envelope-screen {
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%;
@@ -24,7 +24,7 @@
             flex-direction: column; 
             justify-content: center; 
             align-items: center; 
-            z-index: 999999 !important; /* Максимальный приоритет на десктопе */
+            z-index: 999999; 
             cursor: pointer;
         }
         
@@ -36,21 +36,17 @@
             box-shadow: 0 35px 85px rgba(0,0,0,0.2);
             border-radius: 8px; 
             border: 1px solid #EAE2D5; 
-            position: relative; 
-            box-sizing: border-box;
+            position: relative;
         }
 
-        /* Рамка внутри конверта */
         .envelope::before {
             content: ''; 
             position: absolute; 
             top: 14px; left: 14px; right: 14px; bottom: 14px; 
             border: 1px solid rgba(212, 175, 55, 0.3); 
             pointer-events: none;
-            box-sizing: border-box;
         }
 
-        /* Контейнер содержимого */
         .envelope-content {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -59,15 +55,11 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            z-index: 5;
         }
         
-        /* ПЕЧАТЬ С ЖЕСТКИМИ РАЗМЕРАМИ */
         .seal-circle {
             width: 95px; 
             height: 95px; 
-            min-width: 95px;
-            min-height: 95px;
             background: #B21F1F; 
             border-radius: 50%; 
             display: flex; 
@@ -77,7 +69,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
             border: 2px solid #D4AF37;
             animation: pulse 2s infinite;
-            box-sizing: border-box;
         }
         
         @keyframes pulse {
@@ -86,27 +77,27 @@
             100% { transform: scale(1); }
         }
         
-        .seal-heart { font-size: 1.6rem; line-height: 1; margin-bottom: 2px; display: block; pointer-events: none; }
-        .seal-text { color: #FFFDF9; font-family: 'Great Vibes', cursive, serif; font-size: 1.3rem; font-weight: bold; line-height: 1; display: block; text-align: center; pointer-events: none; }
-        .envelope-text { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #7A7465; font-weight: 600; margin-top: 25px; text-align: center; display: block; width: 100%; pointer-events: none; }
+        .seal-heart { font-size: 1.6rem; line-height: 1; margin-bottom: 2px; }
+        .seal-text { color: #FFFDF9; font-family: 'Great Vibes', cursive, serif; font-size: 1.3rem; font-weight: bold; line-height: 1; text-align: center; }
+        .envelope-text { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #7A7465; font-weight: 600; margin-top: 25px; text-align: center; }
         
-        /* МУЗЫКАЛЬНАЯ ПАНЕЛЬ — СТРОГО СКРЫТА ИЗНАЧАЛЬНО */
+        /* ПАНЕЛЬ МУЗЫКИ — ПОЯВЛЯЕТСЯ ТОЛЬКО ПОСЛЕ ОТКРЫТИЯ */
         #cozy-music-bar {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.95); border: 1px solid #9E8454;
             padding: 8px 20px; border-radius: 30px; 
-            display: none !important; /* Полное исключение помех до клика */
+            display: none; 
             align-items: center; gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 100000; cursor: pointer;
         }
         .music-bar-text { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #9E8454; font-weight: 600; }
         
-        /* СТРАНИЦЫ И КАРТОЧКИ */
+        /* СТРАНИЦЫ АНКЕТЫ */
         .page { display: none; width: 100%; min-height: 100vh; padding: 90px 20px 40px 20px; text-align: center; justify-content: center; align-items: center; flex-direction: column; position: relative; z-index: 2; }
         .page.active { display: flex !important; }
         .content-card {
             width: 100%; max-width: 500px; padding: 35px 20px; background: #FFFFFF;
-            border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 15px 45px rgba(0,0,0,0.07); border-radius: 12px; position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 15px 45px rgba(0,0,0,0.07); border-radius: 12px;
         }
         
         h2 { font-size: 1.6rem; color: #9E8454; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
@@ -115,7 +106,7 @@
         .hosts-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #8A8475; font-weight: 600; }
         .hosts-status { font-size: 0.9rem; font-style: italic; color: #7A828A; }
         
-        /* СЕРДЦЕ НА СТРАНИЦЕ 2 */
+        /* СЕРДЦЕ */
         .heart-box {
             width: 180px; height: 180px; background: #FFFDF9; border: 2px solid #bc9356;
             margin: 20px auto; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -123,7 +114,7 @@
         }
         .heart-inside-text { transform: rotate(45deg); font-family: 'Great Vibes', cursive; font-size: 1.8rem; color: #b38e5d; text-align: center; line-height: 1.2; }
         
-        /* ПРОГРАММА ВЕЧЕРА */
+        /* РАСПИСАНИЕ */
         .timeline-container { text-align: left; margin: 15px auto; max-width: 400px; }
         .timeline-item { display: flex; margin-bottom: 14px; font-size: 1.1rem; }
         .timeline-time { font-family: 'Montserrat', sans-serif; font-weight: 600; color: #9E8454; min-width: 60px; }
@@ -144,7 +135,7 @@
         .btn-nav { padding: 10px 22px; background: #FFFFFF; border: 1px solid #9E8454; color: #9E8454; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border-radius: 4px; text-decoration: none; display: inline-block; }
         .btn-nav:hover { background: #9E8454; color: #FFFFFF; }
         
-        /* ПАДАЮЩИЕ ЛЕПЕСТКИ */
+        /* ЛЕПЕСТКИ */
         .rose-petal { position: fixed; top: -20px; pointer-events: none; z-index: 1; background: #ff758f; border-radius: 50%; opacity: 0.7; animation: fall linear infinite; }
         @keyframes fall { 0% { top: -20px; transform: translateX(0) rotate(0deg); opacity: 0.8; } 100% { top: 105vh; transform: translateX(100px) rotate(360deg); opacity: 0; } }
     </style>
@@ -154,17 +145,17 @@
     <audio id="wedding-audio" src="music.mp3" loop preload="auto"></audio>
 
     <div id="cozy-music-bar" onclick="toggleAudio(event)">
-        <span class="music-bar-text" id="music-status-text">🎵 Музыка</span>
+        <span class="music-bar-text" id="music-status-text">▶ Вкл. музыку</span>
     </div>
 
     <div id="envelope-screen" onclick="openEnvelope()">
-        <div class="envelope" onclick="openEnvelope()">
-            <div class="envelope-content" onclick="openEnvelope()">
-                <div class="seal-circle" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="envelope-content">
+                <div class="seal-circle">
                     <span class="seal-heart">❤️</span>
                     <span class="seal-text">S & A</span>
                 </div>
-                <div class="envelope-text" onclick="openEnvelope()">Нажмите, чтобы открыть</div>
+                <div class="envelope-text">Нажмите, чтобы открыть</div>
             </div>
         </div>
     </div>
@@ -283,29 +274,19 @@
             }
         });
 
+        // ЧИСТАЯ ФУНКЦИЯ КЛИКА — БЕЗ БЛОКИРУЮЩИХ ОШИБОК АУДИО
         function openEnvelope() {
-            // Принудительно уничтожаем экран заставки
+            // Удаляем экран конверта мгновенно
             const screen = document.getElementById('envelope-screen');
             if (screen) screen.remove();
             
-            // Включаем видимость музыкальной панели (меняем с none на flex)
+            // Включаем видимость музыкальной плашки
             const musicBar = document.getElementById('cozy-music-bar');
-            if (musicBar) {
-                musicBar.style.setProperty('display', 'flex', 'important');
-            }
+            if (musicBar) musicBar.style.display = 'flex';
             
-            // Мгновенный переход на первую страницу
+            // Переключаем на Первую Страницу
             navigateToPage(1);
             startPetalsFalling();
-
-            // Безопасный пуск музыки
-            audioPlayer.play().then(() => {
-                isMusicPlaying = true;
-                document.getElementById('music-status-text').innerText = "⏸ Пауза";
-            }).catch((err) => {
-                console.log("Браузер ожидает ручного клика по музыке.");
-                document.getElementById('music-status-text').innerText = "▶ Вкл. музыку";
-            });
         }
 
         function navigateToPage(num) {
@@ -326,7 +307,7 @@
                     isMusicPlaying = true;
                     document.getElementById('music-status-text').innerText = "⏸ Пауза";
                 }).catch((err) => {
-                    console.log("Ошибка аудио:", err);
+                    console.log("Воспроизведение не удалось:", err);
                 });
             }
         }
