@@ -15,7 +15,7 @@
             overflow-x: hidden;
         }
         
-        /* ЗАСТАВКА С КОНВЕРТОМ */
+        /* ГЛАВНЫЙ ЭКРАН-БЛОКИРАТОР КОНВЕРТА */
         #envelope-screen {
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%;
@@ -24,8 +24,11 @@
             flex-direction: column; 
             justify-content: center; 
             align-items: center; 
-            z-index: 999999; 
+            z-index: 999999 !important; 
             cursor: pointer;
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.4s ease;
         }
         
         .envelope {
@@ -37,6 +40,7 @@
             border-radius: 8px; 
             border: 1px solid #EAE2D5; 
             position: relative;
+            pointer-events: none; /* Клик проходит сквозь конверт прямо на главный экран */
         }
 
         .envelope::before {
@@ -44,7 +48,6 @@
             position: absolute; 
             top: 14px; left: 14px; right: 14px; bottom: 14px; 
             border: 1px solid rgba(212, 175, 55, 0.3); 
-            pointer-events: none;
         }
 
         .envelope-content {
@@ -81,7 +84,7 @@
         .seal-text { color: #FFFDF9; font-family: 'Great Vibes', cursive, serif; font-size: 1.3rem; font-weight: bold; line-height: 1; text-align: center; }
         .envelope-text { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #7A7465; font-weight: 600; margin-top: 25px; text-align: center; }
         
-        /* ПАНЕЛЬ МУЗЫКИ — ПОЯВЛЯЕТСЯ ТОЛЬКО ПОСЛЕ ОТКРЫТИЯ */
+        /* ПАНЕЛЬ МУЗЫКИ */
         #cozy-music-bar {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.95); border: 1px solid #9E8454;
@@ -92,7 +95,7 @@
         }
         .music-bar-text { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #9E8454; font-weight: 600; }
         
-        /* СТРАНИЦЫ АНКЕТЫ */
+        /* СТРАНИЦЫ И КАРТОЧКИ */
         .page { display: none; width: 100%; min-height: 100vh; padding: 90px 20px 40px 20px; text-align: center; justify-content: center; align-items: center; flex-direction: column; position: relative; z-index: 2; }
         .page.active { display: flex !important; }
         .content-card {
@@ -148,7 +151,7 @@
         <span class="music-bar-text" id="music-status-text">▶ Вкл. музыку</span>
     </div>
 
-    <div id="envelope-screen" onclick="openEnvelope()">
+    <div id="envelope-screen" onclick="openEnvelope(this)">
         <div class="envelope">
             <div class="envelope-content">
                 <div class="seal-circle">
@@ -274,17 +277,20 @@
             }
         });
 
-        // ЧИСТАЯ ФУНКЦИЯ КЛИКА — БЕЗ БЛОКИРУЮЩИХ ОШИБОК АУДИО
-        function openEnvelope() {
-            // Удаляем экран конверта мгновенно
-            const screen = document.getElementById('envelope-screen');
-            if (screen) screen.remove();
+        // ПРИНУДИТЕЛЬНОЕ МГНОВЕННОЕ ОТКРЫТИЕ ПРИ КЛИКЕ В ЛЮБУЮ ТОЧКУ ЭКРАНА
+        function openEnvelope(element) {
+            if (element) {
+                element.style.display = 'none';
+                element.remove();
+            }
             
-            // Включаем видимость музыкальной плашки
+            // Показываем плашку музыки
             const musicBar = document.getElementById('cozy-music-bar');
-            if (musicBar) musicBar.style.display = 'flex';
+            if (musicBar) {
+                musicBar.style.display = 'flex';
+            }
             
-            // Переключаем на Первую Страницу
+            // Включаем первую страницу
             navigateToPage(1);
             startPetalsFalling();
         }
