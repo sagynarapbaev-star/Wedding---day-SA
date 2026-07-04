@@ -10,7 +10,6 @@
         
         body, html {
             height: 100%;
-            /* ЖИВОЙ АНИМИРОВАННЫЙ ФОН: ПЛАВНОЕ ПЕРЕЛИВАНИЕ ПАСТЕЛЬНЫХ ТОНОВ */
             background: linear-gradient(135deg, #FFFDF9 0%, #FFEBF0 40%, #FFF5E8 70%, #FFFDF9 100%);
             background-size: 400% 400%;
             animation: gradientBg 10s ease infinite;
@@ -27,13 +26,11 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* РЕАЛИСТИЧНЫЕ ПАДАЮЩИЕ ЛЕПЕСТКИ РОЗ (УВЕЛИЧЕНО) */
         .rose-petal {
             position: fixed;
             top: -20px;
             pointer-events: none;
             z-index: 1;
-            /* Изменен дизайн: продолговатая форма настоящего лепестка */
             background: linear-gradient(135deg, #ff4d6d 0%, #ff758f 50%, #c9184a 100%);
             border-radius: 70% 30% 70% 40% / 60% 40% 60% 40%;
             opacity: 0.8;
@@ -46,17 +43,17 @@
             100% { top: 105vh; transform: translateX(140px) rotate(360deg) scale(0.7); opacity: 0; }
         }
 
-        /* УВЕЛИЧЕННОЕ ПРОСТОРНОЕ СЕРДЦЕ ДЛЯ ИМЕН МОЛОДОЖЕНОВ */
+        /* КОРРЕКТНЫЕ НАСТРОЙКИ СЕРДЦА: ИМЕНА СИДЯТ СТРОГО ВНУТРИ */
         .heart-wrapper {
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 440px;
+            max-width: 360px;
             min-height: 240px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 15px auto;
+            padding: 10px;
         }
         .heart-contour {
             position: absolute;
@@ -67,34 +64,27 @@
             stroke-dasharray: 1000;
             animation: drawHeart 5s linear infinite, pulseHeart 2s ease-in-out infinite;
         }
-        @keyframes drawHeart {
-            0% { stroke-dashoffset: 1000; }
-            100% { stroke-dashoffset: 0; }
-        }
-        @keyframes pulseHeart {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
+        @keyframes drawHeart { 0% { stroke-dashoffset: 1000; } 100% { stroke-dashoffset: 0; } }
+        @keyframes pulseHeart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
 
-        /* ЧУВСТВЕННЫЙ СТИЛЬ ИМЕН ВНУТРИ СЕРДЦА */
         .couple-names-style {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
+            font-size: 2.8rem; /* Оптимальный размер, чтобы не выходить за рамки */
             color: #b38e5d;
             text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
             line-height: 1.1;
             position: relative;
             z-index: 2;
             display: block;
+            margin-top: 5px;
         }
         .couple-ampersand {
-            font-size: 2.5rem;
+            font-size: 1.9rem;
             color: #d4af37;
             display: block;
-            margin: 5px 0;
+            margin: 2px 0;
         }
 
-        /* РОСКОШНЫЙ И УВАЖИТЕЛЬНЫЙ СТИЛЬ ДЛЯ РОДИТЕЛЕЙ */
         .parents-names-style {
             font-family: 'Great Vibes', cursive;
             font-size: 2.8rem;
@@ -105,7 +95,6 @@
             display: block;
         }
 
-        /* ЭФФЕКТ СЕРДЕЧЕК ПРИ ОТКРЫТИИ */
         .heart-particle {
             position: fixed;
             pointer-events: none;
@@ -117,7 +106,6 @@
             transition: transform 2s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 2s ease-out;
         }
 
-        /* ЭКРАН С КОНВЕРТОМ */
         #envelope-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -129,258 +117,106 @@
             z-index: 99999;
             cursor: pointer;
         }
-
         .envelope {
-            width: 440px; 
-            height: 280px;
-            max-width: 92%;
-            background: #FFFFFF; 
-            box-shadow: 0 35px 85px rgba(0,0,0,0.15);
-            border-radius: 4px;
-            border: 1px solid #EAE2D5;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            width: 440px; height: 280px; max-width: 92%;
+            background: #FFFFFF; box-shadow: 0 35px 85px rgba(0,0,0,0.15);
+            border-radius: 4px; border: 1px solid #EAE2D5;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;
         }
-
         .envelope::before {
-            content: '';
-            position: absolute;
-            top: 14px; left: 14px; right: 14px; bottom: 14px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            pointer-events: none;
+            content: ''; position: absolute; top: 14px; left: 14px; right: 14px; bottom: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.25); pointer-events: none;
         }
-
         .heart-seal-wrapper {
-            width: 110px;
-            height: 100px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 110px; height: 100px; position: relative;
+            display: flex; justify-content: center; align-items: center;
             filter: drop-shadow(0 8px 15px rgba(178, 31, 31, 0.4));
         }
-
-        .heart-svg-seal {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0; left: 0;
-        }
-
+        .heart-svg-seal { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
         .heart-seal-text {
-            position: relative;
-            z-index: 2;
-            color: #F9E7B9; 
-            font-family: 'Great Vibes', cursive;
-            font-weight: bold;
-            font-size: 2.1rem;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
-            margin-top: -6px;
+            position: relative; z-index: 2; color: #F9E7B9; 
+            font-family: 'Great Vibes', cursive; font-weight: bold;
+            font-size: 2.1rem; text-shadow: 1px 2px 4px rgba(0,0,0,0.3); margin-top: -6px;
         }
-
         .envelope-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #8A8475;
-            font-weight: 500;
-            margin-top: 15px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem;
+            letter-spacing: 3px; text-transform: uppercase; color: #8A8475; font-weight: 500; margin-top: 15px;
         }
 
-        /* МУЗЫКАЛЬНАЯ ПАНЕЛЬ */
         #cozy-music-bar {
-            position: fixed;
-            top: 30px; 
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.96);
-            border: 1px solid rgba(158, 132, 84, 0.3);
-            padding: 10px 24px;
-            border-radius: 30px;
-            display: flex; 
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(158, 132, 84, 0.1);
-            z-index: 100000; 
-            cursor: pointer;
-            transition: all 0.3s ease;
+            position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.96); border: 1px solid rgba(158, 132, 84, 0.3);
+            padding: 10px 24px; border-radius: 30px; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 10px 30px rgba(158, 132, 84, 0.1); z-index: 100000; cursor: pointer; transition: all 0.3s ease;
         }
-        .music-bar-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #9E8454;
-            font-weight: 600;
-        }
-        .music-btn-circle {
-            width: 28px;
-            height: 28px;
-            background: #9E8454;
-            color: #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.8rem;
-        }
+        .music-bar-text { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: #9E8454; font-weight: 600; }
+        .music-btn-circle { width: 28px; height: 28px; background: #9E8454; color: #FFFFFF; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; }
 
-        /* КАРТОЧКИ КОНТЕНТА С ЭФФЕКТОМ МАТОВОГО СТЕКЛА */
         .page {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            padding: 95px 20px 30px 20px; 
-            overflow-y: auto;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            z-index: 5;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            padding: 95px 20px 30px 20px; overflow-y: auto;
+            text-align: center; justify-content: center; align-items: center; flex-direction: column; opacity: 0; z-index: 5;
         }
         .page.active { display: flex !important; animation: fadeInPage 0.6s ease forwards; }
         @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
         .content-card {
-            width: 100%;
-            max-width: 520px;
-            margin: auto;
-            padding: 40px 25px;
-            background: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 0 20px 60px rgba(158, 132, 84, 0.08);
-            border-radius: 12px;
-            position: relative;
-            z-index: 10;
-            backdrop-filter: blur(4px); /* Эффект стекла */
+            width: 100%; max-width: 520px; margin: auto; padding: 40px 25px;
+            background: rgba(255, 255, 255, 0.92); border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 20px 60px rgba(158, 132, 84, 0.08); border-radius: 12px; position: relative; z-index: 10; backdrop-filter: blur(4px);
         }
         .content-card::after {
-            content: '';
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid rgba(158, 132, 84, 0.15);
-            border-radius: 8px;
-            pointer-events: none;
+            content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(158, 132, 84, 0.15); border-radius: 8px; pointer-events: none;
         }
 
         h2 { font-size: 1.6rem; color: #9E8454; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
-        
-        .invitation-text {
-            font-size: 1.25rem;
-            line-height: 1.75;
-            font-style: italic;
-            color: #3A4047;
-            margin-bottom: 15px;
-        }
-
+        .invitation-text { font-size: 1.25rem; line-height: 1.75; font-style: italic; color: #3A4047; margin-bottom: 15px; }
         .hosts-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #8A8475; font-weight: 600; margin-bottom: 2px; }
         .hosts-status { font-size: 0.95rem; font-style: italic; color: #7A828A; }
         .hosts-block { margin-bottom: 10px; }
 
-        /* ГРАМОТНАЯ И СДЕРЖАННАЯ ПРОГРАММА ВЕЧЕРА */
-        .timeline-container {
-            text-align: left;
-            margin: 15px auto 5px auto;
-            max-width: 440px;
-        }
-        .timeline-item {
-            display: flex;
-            margin-bottom: 18px;
-            align-items: flex-start;
-        }
-        .timeline-time {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #9E8454;
-            min-width: 60px;
-            padding-top: 2px;
-        }
-        .timeline-dot {
-            margin: 0 15px;
-            font-size: 1rem;
-            line-height: 1;
-            padding-top: 2px;
-            color: #bc9356;
-        }
-        .timeline-text {
-            font-size: 1.15rem;
-            color: #333;
-            line-height: 1.4;
-            font-style: italic;
-        }
+        .timeline-container { text-align: left; margin: 15px auto 5px auto; max-width: 440px; }
+        .timeline-item { display: flex; margin-bottom: 18px; align-items: flex-start; }
+        .timeline-time { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 600; color: #9E8454; min-width: 60px; padding-top: 2px; }
+        .timeline-dot { margin: 0 15px; font-size: 1rem; line-height: 1; padding-top: 2px; color: #bc9356; }
+        .timeline-text { font-size: 1.15rem; color: #333; line-height: 1.4; font-style: italic; }
 
-        /* НАВИГАЦИЯ */
         .nav-box { display: flex; justify-content: center; gap: 12px; margin-top: 30px; width: 100%; position: relative; z-index: 20; }
         .btn-nav {
-            padding: 11px 28px;
-            background: #FFFFFF;
-            border: 1px solid #9E8454;
-            color: #9E8454;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 6px;
+            padding: 11px 28px; background: #FFFFFF; border: 1px solid #9E8454; color: #9E8454;
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer; transition: all 0.3s ease; text-decoration: none; font-weight: 500; border-radius: 6px;
         }
         .btn-nav:hover { background: #9E8454; color: #FFFFFF; box-shadow: 0 5px 15px rgba(158, 132, 84, 0.15); }
 
-        /* ТАЙМЕР */
         .timer-grid { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
         .timer-item { background: rgba(255, 255, 255, 0.8); border: 1px solid #EAE5DC; padding: 10px; min-width: 68px; border-radius: 8px; }
         .timer-num { font-size: 1.5rem; color: #2A2F35; font-weight: 600; }
         .timer-label { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; color: #8A94A0; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* ДРЕСС-КОД */
         .dc-badge {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #9E8454;
-            font-weight: 600;
-            margin: 15px 0;
-            display: inline-block;
-            border-bottom: 1px solid #9E8454;
-            padding-bottom: 4px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 4px;
+            text-transform: uppercase; color: #9E8454; font-weight: 600; margin: 5px 0 15px 0;
+            display: inline-block; border-bottom: 1px solid #9E8454; padding-bottom: 4px;
         }
+        .dc-style-box {
+            background: rgba(255, 253, 249, 0.7); border: 1px dashed rgba(158, 132, 84, 0.4);
+            padding: 20px 15px; border-radius: 8px; margin: 15px 0; text-align: left;
+        }
+        .dc-gender-row { margin-bottom: 14px; }
+        .dc-gender-row:last-child { margin-bottom: 0; }
+        .dc-gender-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: #9E8454; font-weight: 600; margin-bottom: 4px; }
+        .dc-gender-text { font-size: 1.15rem; font-style: italic; color: #3A4047; line-height: 1.4; }
 
-        /* КНИГА ПОЖЕЛАНИЙ */
         .wish-input, .wish-text { 
-            width: 100%; padding: 12px; margin-bottom: 12px; 
-            border: 1px solid rgba(158, 132, 84, 0.2); 
-            background: rgba(255, 255, 255, 0.6); 
-            font-family: 'Montserrat', sans-serif; font-size: 0.9rem; 
-            outline: none; border-radius: 8px;
-            transition: all 0.3s ease;
+            width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid rgba(158, 132, 84, 0.2); 
+            background: rgba(255, 255, 255, 0.6); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; outline: none; border-radius: 8px; transition: all 0.3s ease;
         }
-        .wish-input:focus, .wish-text:focus {
-            border-color: #9E8454;
-            background: #FFFFFF;
-            box-shadow: 0 0 10px rgba(158, 132, 84, 0.08);
-        }
+        .wish-input:focus, .wish-text:focus { border-color: #9E8454; background: #FFFFFF; box-shadow: 0 0 10px rgba(158, 132, 84, 0.08); }
         .wish-text { height: 75px; resize: none; }
         .wishes-output { max-height: 130px; overflow-y: auto; text-align: left; font-size: 0.9rem; margin-top: 15px; }
         .wish-item { padding: 10px; border-left: 2px solid #9E8454; background: #FAFAFA; margin-bottom: 6px; font-style: italic; border-radius: 0 8px 8px 0; }
 
-        .address-card-border {
-            border: 2px solid #EAE2D5;
-            padding: 30px 20px;
-            position: relative;
-            margin: 15px 0 25px 0;
-            border-radius: 8px;
-        }
-        .address-card-border::after {
-            content: '✨';
-            position: absolute;
-            top: -13px; left: 50%;
-            transform:
+        .address-card-border { border: 2px solid #EAE2D5; padding: 30px 20px; position: relative; margin: 15px 0 25px 0; border-radius: 8px; }
+        .address-card-border::after { content: '✨'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: #FFFFFF; padding: 0
