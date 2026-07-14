@@ -5,45 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадебное приглашение</title>
     <link rel="stylesheet" href="css/styles.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-
-    <style>
-        /* Исправление заглавной буквы "А" в именах через точечный приоритетный шрифт */
-        h1, h2,
-        body > div:nth-child(3) > div > div > div:nth-child(2),
-        body > div:nth-child(3) > div > div > div:nth-child(5),
-        body > div:nth-child(4) > div > div:nth-of-type(1),
-        body > div:nth-child(2) > div > div > div:nth-child(1) {
-            font-family: 'Cormorant Garamond', Georgia, serif !important;
-            font-style: italic !important;
-            font-weight: 600 !important;
-            text-transform: none !important;
-        }
-
-        /* Анимация пульсации сердечка между именами Сагын и Айнуру */
-        body > div:nth-child(4) > div > div:nth-of-type(1) span {
-            display: inline-block;
-            color: #b83b3b;
-            animation: heartbeat 1.6s infinite ease-in-out;
-            margin: 0 8px;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-        }
-
-        /* Супер-плавные лепестки без лагов на телефонах */
-        .petal {
-            position: absolute;
-            background-color: rgba(255, 183, 197, 0.45);
-            border-radius: 150% 0 150% 150%;
-            pointer-events: none;
-            z-index: 9999;
-            will-change: transform, opacity;
-        }
-    </style>
 </head>
 <body>
 
@@ -88,10 +49,10 @@
         <div>
             <h2>Слово молодожёнов</h2>
             <p>В этот особенный день начинается наша личная вселенная. Мы обрели друг в друге не просто любовь, а бесконечное вдохновение, тихую гавань, надежную опору и дом для наших душ.</p>
-            <p>Мы искренне верим, что настоящее счастье расцветает только в кругу тех, кто нам по-настоящему дорог. И перед тем как сделать этот самый важный и ответственный шаг в наше общее будущее, мы хотим пригласить вас стать главными свидетелями рождения нашей семьи.</p>
+            <p>Мы искренне верим, что настоящее счастье расцветает только в кругу тех, кто нам по-настоящему дорог. И перед тем как сделать этот самый важный и осознанный шаг в наше общее будущее, мы хотим пригласить вас стать главными свидетелями рождения нашей семьи.</p>
             <p>Обещаем, что этот вечер будет наполнен невероятным теплом, душевностью и моментами, которые мы вместе сохраним в памяти на всю жизнь!</p>
 
-            <div>Сагын <span>❤</span> Айнуру</div>
+            <div>Сагын ❤️ Айнуру</div>
 
             <div></div>
         </div>
@@ -152,10 +113,6 @@
                 <div><div id="seconds">00</div><div>Сек</div></div>
             </div>
 
-            <p style="margin-top: 35px; font-style: italic; color: #555; font-size: 1.05rem; line-height: 1.7; padding: 0 15px; text-align: center; max-width: 550px; margin-left: auto; margin-right: auto;">
-                Каждая секунда приближает нас к этому счастливому мгновению. Мы с огромным трепетом и нетерпением ждем нашей встречи, чтобы в окружении самых близких людей красиво и незабываемо отпраздновать этот особенный день. До скорой встречи!
-            </p>
-
             <div></div>
         </div>
     </div>
@@ -170,19 +127,18 @@
         </div>
     </div>
 
-    <audio id="bg-music" loop preload="auto" src="music.mp3"></audio>
+    <audio loop preload="auto" src="music.mp3"></audio>
 
     <script>
-        // Находим элементы строго по их порядковому номеру, как это прописано в твоих оригинальных стилях CSS
-        const musicControl = document.querySelector('body > div:nth-child(1)');
         const introScreen = document.querySelector('body > div:nth-child(2)');
-        const audio = document.getElementById('bg-music');
+        const audio = document.querySelector('audio');
+        const musicControl = document.querySelector('body > div:nth-child(1)');
 
         if (introScreen) {
             introScreen.addEventListener('click', () => {
                 introScreen.style.opacity = '0';
                 setTimeout(() => introScreen.style.display = 'none', 500);
-                audio.play().catch(e => console.log("Автовоспроизведение заблокировано"));
+                audio.play().catch(e => console.log("Музыка ждет клика"));
             });
         }
 
@@ -198,7 +154,6 @@
             });
         }
 
-        // --- Таймер обратного отсчета ---
         const targetDate = new Date('2026-07-31T17:00:00').getTime();
 
         function updateTimer() {
@@ -224,43 +179,6 @@
         }
         setInterval(updateTimer, 1000);
         updateTimer();
-
-        // --- Плавные лепестки сакуры на аппаратном ускорении ---
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const maxPetals = isMobile ? 10 : 25; 
-
-        function createPetal() {
-            if (document.querySelectorAll('.petal').length >= maxPetals) return;
-
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            
-            const startX = Math.random() * window.innerWidth;
-            const size = Math.random() * (isMobile ? 12 : 16) + 8;
-            const duration = Math.random() * 5 + 6; 
-            
-            petal.style.width = `${size}px`;
-            petal.style.height = `${size}px`;
-            petal.style.left = `${startX}px`;
-            petal.style.top = '-20px';
-            petal.style.opacity = Math.random() * 0.4 + 0.5;
-            
-            petal.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-in`;
-            
-            document.body.appendChild(petal);
-            
-            requestAnimationFrame(() => {
-                const drift = (Math.random() - 0.5) * 150;
-                petal.style.transform = `translate3d(${drift}px, ${window.innerHeight + 50}px, 0) rotate(${Math.random() * 360}deg)`;
-                petal.style.opacity = '0';
-            });
-
-            setTimeout(() => {
-                petal.remove();
-            }, duration * 1000);
-        }
-
-        setInterval(createPetal, isMobile ? 1000 : 500);
     </script>
 </body>
 </html>
