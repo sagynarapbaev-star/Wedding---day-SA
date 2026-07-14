@@ -4,18 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадебное приглашение</title>
-    <link rel="stylesheet" href="css/style.css">
     
-    <!-- Подключаем изысканный шрифт Cormorant Garamond, где буква "А" выглядит безупречно -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Точечное исправление шрифта для имен, чтобы буква "А" была идеальной */
+        h1, h2, 
+        .intro-screen-title,
+        body > div:nth-child(3) > div > div > div:nth-child(2), /* Арстан & Нурайым */
+        body > div:nth-child(3) > div > div > div:nth-child(5), /* Муктарбек & Шаарбу */
+        .heart-names-container {
+            font-family: 'Cormorant Garamond', Georgia, serif !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+        }
+
+        /* Стильное оформление имен с сердечком на второй странице */
+        .heart-names-container {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px auto 10px auto;
+            padding: 8px 24px;
+            border: 1.5px solid rgba(197, 160, 89, 0.4);
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.65);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            font-size: 1.6rem !important;
+        }
+
+        .animated-heart {
+            color: #b83b3b;
+            font-size: 1.3rem;
+            display: inline-block;
+            animation: heartbeat 1.6s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.22); }
+        }
+
+        /* Лепестки на аппаратном ускорении телефона (без лагов) */
+        .petal {
+            position: absolute;
+            background-color: rgba(255, 183, 197, 0.45);
+            border-radius: 150% 0 150% 150%;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform, opacity;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Фоновая музыка: Christina Perri - A Thousand Years -->
-    <!-- Назови файл песни music.mp3 и закинь в корень папки репозитория на GitHub -->
-    <audio loop preload="auto" src="music.mp3"></audio>
-
-    <div>
+    <div id="music-btn">
         <span>Включить музыку</span>
         <div>🎵</div>
     </div>
@@ -23,14 +70,12 @@
     <div>
         <div>
             <div>
-                <!-- Исправлено отображение заглавных букв S и A благородным шрифтом -->
-                <div style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic !important; font-weight: 600 !important; text-transform: none !important;">S&amp;A</div>
+                <div class="intro-screen-title">S&amp;A</div>
             </div>
             <div>Нажмите, чтобы открыть</div>
         </div>
     </div>
 
-    <!-- Страница 1: Приглашение (Текст изменен на душевный и чувственный) -->
     <div>
         <div>
             <h2>Дорогие близкие и друзья!</h2>
@@ -41,12 +86,11 @@
             <div>
                 <div>
                     <div>Хозяева торжества</div>
-                    <!-- Исправление шрифта для Арстана -->
-                    <div style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic !important; font-weight: 600 !important; text-transform: none !important;">Арстан &amp; Нурайым</div>
+                    <div>Арстан &amp; Нурайым</div>
                     <div>(Родители жениха)</div>
                 </div>
                 <div>
-                    <div style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic !important; font-weight: 600 !important; text-transform: none !important;">Муктарбек &amp; Шаарбу</div>
+                    <div>Муктарбек &amp; Шаарбу</div>
                     <div>(Родители невесты)</div>
                 </div>
             </div>
@@ -55,7 +99,6 @@
         </div>
     </div>
 
-    <!-- Страница 2: Слово молодоженов -->
     <div>
         <div>
             <h2>Слово молодожёнов</h2>
@@ -63,11 +106,9 @@
             <p>Мы искренне верим, что настоящее счастье расцветает только в кругу тех, кто нам по-настоящему дорог. И перед тем как сделать этот самый важный и ответственный шаг в наше общее будущее, мы хотим пригласить вас стать главными свидетелями рождения нашей семьи.</p>
             <p>Обещаем, что этот вечер будет наполнен невероятным теплом, душевностью и моментами, которые мы вместе сохраним в памяти на всю жизнь!</p>
 
-            <!-- Имена в красивом, аккуратном сердечке. Стили прописаны точечно, чтобы не сломать сетку -->
-            <div style="display: inline-flex !important; align-items: center; justify-content: center; gap: 10px; margin: 25px auto 10px auto; padding: 8px 24px; border: 1.5px solid rgba(197, 160, 89, 0.4); border-radius: 30px; background-color: rgba(255, 255, 255, 0.6); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02); font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic !important; font-weight: 600 !important; text-transform: none !important; font-size: 1.6rem !important;">
+            <div class="heart-names-container">
                 <span>Сагын</span>
-                <span style="color: #b83b3b; font-size: 1.3rem; display: inline-block; animation: heartbeat 1.6s infinite ease-in-out;">❤</span>
-                <!-- Буква А в имени Айнуру теперь отображается корректно благодаря шрифту -->
+                <span class="animated-heart">❤</span>
                 <span>Айнуру</span>
             </div>
 
@@ -75,7 +116,6 @@
         </div>
     </div>
 
-    <!-- Программа вечера (Оригинальная структура полностью сохранена) -->
     <div>
         <div>
             <h2>Программа вечера</h2>
@@ -98,7 +138,6 @@
         </div>
     </div>
 
-    <!-- Пожелания к стилю (Оригинальная структура) -->
     <div>
         <div>
             <h2>Пожелания к стилю</h2>
@@ -110,7 +149,6 @@
         </div>
     </div>
 
-    <!-- Адрес торжества (Оригинальная структура) -->
     <div>
         <div>
             <h2>Адрес торжества</h2>
@@ -122,7 +160,6 @@
         </div>
     </div>
 
-    <!-- Таймер + Новый красивый текст снизу -->
     <div>
         <div>
             <h2>До торжества осталось</h2>
@@ -134,7 +171,6 @@
                 <div><div id="seconds">00</div><div>Сек</div></div>
             </div>
 
-            <!-- Грамотное, душевное послание под таймером -->
             <div style="margin-top: 35px; font-style: italic; color: #555; font-size: 1.05rem; line-height: 1.7; padding: 0 15px; text-align: center; max-width: 550px; margin-left: auto; margin-right: auto;">
                 Каждая секунда приближает нас к этому счастливому мгновению. Мы с огромным трепетом и нетерпением ждем нашей встречи, чтобы в окружении самых близких людей красиво и незабываемо отпраздновать этот особенный день. До скорой встречи!
             </div>
@@ -143,7 +179,6 @@
         </div>
     </div>
 
-    <!-- Книга пожеланий (Оригинальная структура) -->
     <div>
         <div>
             <h2>Книга пожеланий</h2>
@@ -154,29 +189,22 @@
         </div>
     </div>
 
-    <!-- Анимация пульсации сердечка -->
-    <style>
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-        }
-        /* Стиль для лепестков, использующий аппаратное ускорение */
-        .petal {
-            position: absolute;
-            background-color: rgba(255, 183, 197, 0.4);
-            border-radius: 150% 0 150% 150%;
-            pointer-events: none;
-            z-index: 9999;
-            will-change: transform, opacity;
-        }
-    </style>
+    <audio loop preload="auto" src="music.mp3"></audio>
 
-    <!-- Скрипты: Логика работы, Таймер и Плавные лепестки на чистом CSS-ускорении -->
     <script>
-        // --- 1. Работа музыки и заставки ---
-        const introScreen = document.querySelector('body > div:nth-child(3)');
+        // --- 1. Исправленная логика музыки и заставки (ищет по точному тексту, а не номерам) ---
+        const allDivs = document.querySelectorAll('body > div');
+        let introScreen = null;
+        
+        // Автоматически находим экран заставки по ключевому тексту внутри него
+        allDivs.forEach(div => {
+            if (div.textContent.includes('Нажмите, чтобы открыть')) {
+                introScreen = div;
+            }
+        });
+
         const audio = document.querySelector('audio');
-        const musicControl = document.querySelector('body > div:nth-child(2)');
+        const musicControl = document.getElementById('music-btn');
 
         if (introScreen) {
             introScreen.addEventListener('click', () => {
@@ -205,9 +233,7 @@
             const now = new Date().getTime();
             const difference = targetDate - now;
 
-            if (difference < 0) {
-                return;
-            }
+            if (difference < 0) return;
 
             const days = Math.floor(difference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -229,7 +255,7 @@
 
         // --- 3. Оптимизированное падение лепестков без лагов ---
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const maxPetals = isMobile ? 10 : 25; // Снижаем число лепестков на мобильных до 10 для супер-плавности
+        const maxPetals = isMobile ? 10 : 25; 
 
         function createPetal() {
             if (document.querySelectorAll('.petal').length >= maxPetals) return;
@@ -239,7 +265,7 @@
             
             const startX = Math.random() * window.innerWidth;
             const size = Math.random() * (isMobile ? 12 : 16) + 8;
-            const duration = Math.random() * 5 + 6; // Медленное, нежное падение
+            const duration = Math.random() * 5 + 6; 
             
             petal.style.width = `${size}px`;
             petal.style.height = `${size}px`;
@@ -247,7 +273,6 @@
             petal.style.top = '-20px';
             petal.style.opacity = Math.random() * 0.4 + 0.5;
             
-            // Используем translate3d, чтобы задействовать видеочип смартфона и убрать тормоза
             petal.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-in`;
             
             document.body.appendChild(petal);
