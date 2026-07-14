@@ -3,224 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Приглашение на свадьбу — Сагын & Айнуру</title>
+    <title>S & A</title>
+    
+    <!-- Подключаем оригинальные стили вашего сайта, чтобы вернуть весь дизайн -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Если ваши стили лежат в другой папке, например просто style.css, измените этот путь -->
     
     <style>
-        /* Оптимизация прокрутки и рендеринга для телефонов */
+        /* Добавляем точечные оптимизации для плавности, не ломая основной дизайн */
         html, body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* Плавный инерционный скролл на iOS */
-            background-color: #fcfbf7;
-            color: #333;
+            -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
         }
-
-        /* Принудительное аппаратное ускорение для графики (убирает тормоза) */
-        div, section, img, p, h2 {
+        
+        /* Включаем аппаратное ускорение для плавности анимаций на смартфонах */
+        .section, img, div {
             backface-visibility: hidden;
             transform: translate3d(0, 0, 0);
             will-change: transform, opacity;
         }
 
-        /* Общие контейнеры секций */
-        .section {
-            padding: 40px 20px;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            box-sizing: border-box;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #8b7355;
-        }
-
-        p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        /* Кнопка музыки */
-        .music-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
+        /* Стиль для кнопки музыки, чтобы она не ломалась */
+        .music-control-btn {
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
             transition: transform 0.3s ease;
         }
-
-        .music-btn.playing {
-            animation: spin 4s linear infinite;
+        
+        .music-control-btn.playing {
+            animation: spin 5s linear infinite;
         }
 
         @keyframes spin {
             100% { transform: rotate(360deg); }
         }
-
-        /* Начальный экран (Экран открытия) */
-        .welcome-screen {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #f7f3eb;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 9999;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .welcome-screen.hidden {
-            transform: translateY(-100%);
-        }
-
-        .welcome-btn {
-            margin-top: 20px;
-            padding: 12px 30px;
-            border: 1px solid #8b7355;
-            background: transparent;
-            color: #8b7355;
-            border-radius: 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .welcome-btn:active {
-            background: #8b7355;
-            color: #fff;
-        }
-
-        /* Блок с именем гостя */
-        .guest-box {
-            background: #fdfaf2;
-            border: 1px solid #eee;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .guest-name {
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: #8b7355;
-        }
-
-        /* Тайминг */
-        .timing-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0ebe1;
-        }
-
-        /* Кнопка карты */
-        .map-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 25px;
-            background: #8b7355;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-        }
     </style>
 </head>
 <body>
 
+    <!-- Оптимизированный аудио-плеер (загрузка отключена до клика, чтобы сайт не зависал) -->
     <audio id="bg-music" loop preload="none">
         <source src="audio/background.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="music-control" class="music-btn">🎵</div>
-
-    <div id="welcome-screen" class="welcome-screen">
-        <h1 style="font-size: 2.5rem; margin-bottom: 10px; color: #8b7355;">S & A</h1>
-        <div style="font-size: 1.1rem; margin-bottom: 30px;">Свадебное приглашение</div>
-        
-        <div class="guest-box" id="welcome-guest-box" style="display: none; border: none; background: transparent;">
-            <p>Уважаемый(ая),</p>
-            <div id="welcome-guest-name" class="guest-name"></div>
-        </div>
-
-        <button class="welcome-btn" id="open-btn">Открыть приглашение</button>
+    <!-- Ваша оригинальная кнопка музыки (с сохранением ваших классов) -->
+    <div class="music-wrapper">
+        <span>Включить музыку</span>
+        <div id="music-control" class="music-control-btn">🎵</div>
     </div>
 
-    <main style="padding-top: 20px;">
-
-        <section class="section">
-            <h2>Дорогие Гости</h2>
-            
-            <div id="main-guest-box" class="guest-box" style="display: none;">
-                <p>Дорогой(ая)</p>
-                <div id="guest-name" class="guest-name"></div>
+    <!-- Начальный экран открытия (Ваша оригинальная верстка) -->
+    <div id="welcome-screen" class="welcome-overlay">
+        <div class="welcome-content">
+            <div class="names-logo">
+                <div>S&amp;A</div>
             </div>
-
-            <p>Рады пригласить вас на наше семейное торжество!</p>
-            <p>Разделите с нами один из самых счастливых и ответственных моментов — прекрасный праздник в честь бракосочетания наших детей Сагына и Айнуру.</p>
-            <p>Ваши улыбки, добрые пожелания и поддержка станут главным украшением этого важного дня!</p>
-
-            <div style="margin-top: 30px;">
-                <p><strong>Хозяева торжества:</strong></p>
-                <p>Арстан & Нурайым <br><small>(Родители жениха)</small></p>
-                <p>Муктарбек & Шаарбу <br><small>(Родители невесты)</small></p>
+            <!-- Сюда автоматически подставится имя гостя из ссылки -->
+            <div id="welcome-guest-box" style="display: none; margin: 15px 0;">
+                <p style="font-size: 1.1rem; margin: 5px 0;">Уважаемый(ая)</p>
+                <div id="welcome-guest-name" style="font-size: 1.4rem; font-weight: bold; color: #8b7355;"></div>
             </div>
-        </section>
+            <button id="open-btn" class="open-button">Нажмите, чтобы открыть</button>
+        </div>
+    </div>
 
-        <hr style="border: 0; border-top: 1px solid #f0ebe1; width: 80%;">
+    <!-- Основной контент (Ваши оригинальные блоки) -->
+    <div class="main-content">
+        <!-- Блок 1: Приветствие -->
+        <div class="section">
+            <div class="section-content">
+                <h2>Дорогие Гости</h2>
+                
+                <!-- Блок с именем в самом начале -->
+                <div id="main-guest-box" style="display: none; margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
+                    <p style="margin: 0;">Дорогой(ая)</p>
+                    <div id="guest-name" style="font-size: 1.4rem; font-weight: bold; color: #8b7355;"></div>
+                </div>
 
-        <section class="section">
-            <h2>Слово молодожёнов</h2>
-            <p>В жизни каждого человека бывают моменты, когда весь мир замирает и открывается новая, чистая глава. Мы нашли это невероятное счастье и вдохновение друг в друге.</p>
-            <p>И перед тем как сделать этот самый важный шаг в наше общее будущее, мы хотим искренне пригласить вас стать главными свидетелями начала нашей большой истории.</p>
-            <p style="font-size: 1.2rem; font-style: italic; color: #8b7355; margin-top: 15px;">Сагын & Айнуру</p>
-        </section>
+                <p>Рады пригласить вас на наше семейное торжество!</p>
+                <p>Разделите с нами один из самых счастливых и ответственных моментов — прекрасный праздник в честь бракосочетания наших детей Сагына и Айнуру.</p>
+                <p>Ваши улыбки, добрые пожелания и поддержка станут главным украшением этого важного дня!</p>
 
-        <hr style="border: 0; border-top: 1px solid #f0ebe1; width: 80%;">
-
-        <section class="section">
-            <h2>Программа вечера</h2>
-            <p>Тайминг нашего праздничного дня:</p>
-            <div style="text-align: left; margin-top: 20px;">
-                <div class="timing-item"><span>17:00</span><strong>Сбор дорогих гостей</strong></div>
-                <div class="timing-item"><span>17:30</span><strong>Торжественное начало праздника</strong></div>
-                <div class="timing-item"><span>18:00</span><strong>Главный выход молодожёнов</strong></div>
-                <div class="timing-item"><span>19:00</span><strong>Званый ужин и шоу-программа</strong></div>
-                <div class="timing-item"><span>22:00</span><strong>Торжественный финал вечера</strong></div>
+                <div class="hosts">
+                    <div class="host-item">
+                        <div class="host-title">Хозяева торжества</div>
+                        <div class="host-names">Арстан &amp; Нурайым</div>
+                        <div class="host-sub">(Родители жениха)</div>
+                    </div>
+                    <div class="host-item">
+                        <div class="host-names">Муктарбек &amp; Шаарбу</div>
+                        <div class="host-sub">(Родители невесты)</div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <hr style="border: 0; border-top: 1px solid #f0ebe1; width: 80%;">
+        <!-- Блок 2: Слово молодоженов -->
+        <div class="section">
+            <div class="section-content">
+                <h2>Слово молодожёнов</h2>
+                <p>В жизни каждого человека бывают моменты, когда весь мир замирает и открывается новая, чистая глава. Мы нашли это невероятное счастье и вдохновение друг в другe.</p>
+                <p>И перед тем как сделать этот самый важный шаг в наше общее будущее, мы хотим искренне пригласить вас стать главными свидетелями начала нашей большой истории.</p>
+                <div class="signature">Сагын &amp; Айнуру</div>
+            </div>
+        </div>
 
-        <section class="section">
-            <h2>Пожелания к стилю</h2>
-            <p><strong>Dress Code: Cocktail / Black Tie</strong></p>
-            <p>Мы будем искренне рады видеть вас в элегантных вечерних платьях и строгих классических костюмах.</p>
-        </section>
+        <!-- Блок 3: Программа вечера -->
+        <div class="section">
+            <div class="section-content">
+                <h2>Программа вечера</h2>
+                <p>Тайминг нашего праздничного дня:</p>
 
-        <hr style="border: 0; border-top: 1px solid #f0ebe1; width: 80%;">
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time">17:00</div><div class="event">Сбор дорогих гостей</div></div>
+                    <div class="timeline-item"><div class="time">17:30</div><div class="event">Торжественное начало праздника</div></div>
+                    <div class="timeline-item"><div class="time">18:00</div><div class="event">Главный выход и встреча молодожёнов</div></div>
+                    <div class="timeline-item"><div class="time">18:30</div><div class="event">Поздравления и напутствия от хозяев вечера</div></div>
+                    <div class="timeline-item"><div class="time">19:00</div><div class="event">Званый гастрономический ужин</div></div>
+                    <div class="timeline-item"><div class="time">19:30</div><div class="event">Музыкальная пауза и антракт</div></div>
+                    <div class="timeline-item"><div class="time">20:30</div><div class="event">Искренние поздравления молодожёнов гостями</div></div>
+                    <div class="timeline-item"><div class="time">21:00</div><div class="event">Увлекательная шоу-программа и конкурсы</div></div>
+                    <div class="timeline-item"><div class="time">21:20</div><div class="event">Танцевальный антракт</div></div>
+                    <div class="timeline-item"><div class="time">22:00</div><div class="event">Торжественный финал вечера и проводы молодых</div></div>
+                </div>
+            </div>
+        </div>
 
-        <section class="section">
-            <h2>Адрес торжества</h2>
-            <p><strong>Ресторан "Олигарх"</strong></p>
+        <!-- Блок 4: Дресс-код -->
+        <div class="section">
+            <div class="section-content">
+                <h2>Пожелания к стилю</h2>
+                <div class="style-title">Классический стиль</div>
+                <p><strong>Dress Code: Cocktail / Black Tie</strong></p>
+                <p>Мы будем искренне рады видеть вас в элегантных вечерних или коктейльных платьях и строгих классических костюмах в изысканной цветовой гамме.</p>
+            </div>
+        </div>
+
+        <!-- Блок 5: Карта -->
+        <div class="section">
+            <div class="section-content">
+                <h2>Адрес торжества</h2>
+                <p>Ресторан &quot;Олигарх&quot;</p>
+                <p>г. Ош, микрорайон Анар, 1а</p>
+                <a href="https://go.2gis.com/nN7sT" target="_blank" class="map-button">Открыть карту 2ГИС 📍</a>
+            </div>
+        </div>
+
+        <!-- Блок 6: Таймер -->
+        <div class="section">
+            <div class="section-content">
+                <h2>До торжества осталось</h2>
+                <p>31 июля 2026 года в 17:00</p>
+                <div class="timer" id="countdown-timer">
+                    <!-- Будет заполняться через JS -->
+                    <div class="timer-item"><div id="days" class="timer-val">00</div><div class="timer-label">Дней</div></div>
+                    <div class="timer-item"><div id="hours" class="timer-val">00</div><div class="timer-label">Часов</div></div>
+                    <div class="timer-item"><div id="minutes" class="timer-val">00</div><div class="timer-label">Мин</div></div>
+                    <div class="timer-item"><div id="seconds" class="timer-val">00</div><div class="timer-label">Сек</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты: Логика работы без тормозов -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-control');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const openBtn = document.getElementById('open-btn');
+
+            // 1. ПОЛУЧЕНИЕ ИМЕНИ ИЗ ССЫЛКИ (?name=Сыймык)
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('name');
+
+            if (guestName) {
+                const decodedName = decodeURIComponent(guestName);
+                
+                // Отображаем имя на заставке
+                document.getElementById('welcome-guest-name').innerText = decodedName;
+                document.getElementById('welcome-guest-box').style.display = 'block';
+
+                // Отображаем имя внутри основного приглашения
+                document.getElementById('guest-name').innerText = decodedName;
+                document.getElementById('main-guest-box').style.display = 'block';
+            }
+
+            // 2. БЕЗОПАСНЫЙ ЗАПУСК МУЗЫКИ ПРИ ОТКРЫТИИ
+            const startMusic = () => {
+                audio.preload = 'auto'; // Разрешаем загрузку только сейчас
+                audio.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(err => {
+                    console.log("Автозапуск заблокирован политикой браузера:", err);
+                });
+            };
+
+            // При нажатии кнопки "Открыть" плавно скрываем заставку и запускаем плеер
+            openBtn.addEventListener('click', () => {
+                welcomeScreen.style.opacity = '0';
+                welcomeScreen.style.transition = 'opacity 0.6s ease';
+                setTimeout(() => {
+                    welcomeScreen.style.display = 'none';
+                }, 600);
+                startMusic();
+            });
+
+            // Кнопка включения/выключения музыки
+            musicBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    musicBtn.classList.add('playing');
+                } else {
+                    audio.pause();
+                    musicBtn.classList.remove('playing');
+                }
+            });
+
+            // 3. ТАЙМЕР ОБРАТНОГО ОТСЧЕТА (Оптимизированный, без тормозов)
+            const targetDate = new Date("July 31, 2026 17:00:00").getTime();
+
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference < 0) {
+                    clearInterval(timerInterval);
+                    return;
+                }
+
+                const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            };
+
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer(); // первый запуск
+        });
+    </script>
+</body>
+</html>
