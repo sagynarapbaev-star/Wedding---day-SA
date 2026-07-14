@@ -4,52 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свадебное приглашение</title>
-    
     <link rel="stylesheet" href="css/styles.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
     <style>
-        /* Точечное исправление шрифта для имен, чтобы буква "А" была идеальной */
-        h1, h2, 
-        .intro-screen-title,
-        body > div:nth-child(3) > div > div > div:nth-child(2), /* Арстан & Нурайым */
-        body > div:nth-child(3) > div > div > div:nth-child(5), /* Муктарбек & Шаарбу */
-        .heart-names-container {
+        /* Исправление заглавной буквы "А" в именах через точечный приоритетный шрифт */
+        h1, h2,
+        body > div:nth-child(3) > div > div > div:nth-child(2),
+        body > div:nth-child(3) > div > div > div:nth-child(5),
+        body > div:nth-child(4) > div > div:nth-of-type(1),
+        body > div:nth-child(2) > div > div > div:nth-child(1) {
             font-family: 'Cormorant Garamond', Georgia, serif !important;
             font-style: italic !important;
             font-weight: 600 !important;
             text-transform: none !important;
         }
 
-        /* Стильное оформление имен с сердечком на второй странице */
-        .heart-names-container {
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 25px auto 10px auto;
-            padding: 8px 24px;
-            border: 1.5px solid rgba(197, 160, 89, 0.4);
-            border-radius: 30px;
-            background-color: rgba(255, 255, 255, 0.65);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-            font-size: 1.6rem !important;
-        }
-
-        .animated-heart {
-            color: #b83b3b;
-            font-size: 1.3rem;
+        /* Анимация пульсации сердечка между именами Сагын и Айнуру */
+        body > div:nth-child(4) > div > div:nth-of-type(1) span {
             display: inline-block;
+            color: #b83b3b;
             animation: heartbeat 1.6s infinite ease-in-out;
+            margin: 0 8px;
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.22); }
+            50% { transform: scale(1.25); }
         }
 
-        /* Лепестки на аппаратном ускорении телефона (без лагов) */
+        /* Супер-плавные лепестки без лагов на телефонах */
         .petal {
             position: absolute;
             background-color: rgba(255, 183, 197, 0.45);
@@ -62,7 +47,7 @@
 </head>
 <body>
 
-    <div id="music-btn">
+    <div>
         <span>Включить музыку</span>
         <div>🎵</div>
     </div>
@@ -70,7 +55,7 @@
     <div>
         <div>
             <div>
-                <div class="intro-screen-title">S&amp;A</div>
+                <div>S&amp;A</div>
             </div>
             <div>Нажмите, чтобы открыть</div>
         </div>
@@ -106,11 +91,7 @@
             <p>Мы искренне верим, что настоящее счастье расцветает только в кругу тех, кто нам по-настоящему дорог. И перед тем как сделать этот самый важный и ответственный шаг в наше общее будущее, мы хотим пригласить вас стать главными свидетелями рождения нашей семьи.</p>
             <p>Обещаем, что этот вечер будет наполнен невероятным теплом, душевностью и моментами, которые мы вместе сохраним в памяти на всю жизнь!</p>
 
-            <div class="heart-names-container">
-                <span>Сагын</span>
-                <span class="animated-heart">❤</span>
-                <span>Айнуру</span>
-            </div>
+            <div>Сагын <span>❤</span> Айнуру</div>
 
             <div></div>
         </div>
@@ -171,9 +152,9 @@
                 <div><div id="seconds">00</div><div>Сек</div></div>
             </div>
 
-            <div style="margin-top: 35px; font-style: italic; color: #555; font-size: 1.05rem; line-height: 1.7; padding: 0 15px; text-align: center; max-width: 550px; margin-left: auto; margin-right: auto;">
+            <p style="margin-top: 35px; font-style: italic; color: #555; font-size: 1.05rem; line-height: 1.7; padding: 0 15px; text-align: center; max-width: 550px; margin-left: auto; margin-right: auto;">
                 Каждая секунда приближает нас к этому счастливому мгновению. Мы с огромным трепетом и нетерпением ждем нашей встречи, чтобы в окружении самых близких людей красиво и незабываемо отпраздновать этот особенный день. До скорой встречи!
-            </div>
+            </p>
 
             <div></div>
         </div>
@@ -189,22 +170,13 @@
         </div>
     </div>
 
-    <audio loop preload="auto" src="music.mp3"></audio>
+    <audio id="bg-music" loop preload="auto" src="music.mp3"></audio>
 
     <script>
-        // --- 1. Исправленная логика музыки и заставки (ищет по точному тексту, а не номерам) ---
-        const allDivs = document.querySelectorAll('body > div');
-        let introScreen = null;
-        
-        // Автоматически находим экран заставки по ключевому тексту внутри него
-        allDivs.forEach(div => {
-            if (div.textContent.includes('Нажмите, чтобы открыть')) {
-                introScreen = div;
-            }
-        });
-
-        const audio = document.querySelector('audio');
-        const musicControl = document.getElementById('music-btn');
+        // Находим элементы строго по их порядковому номеру, как это прописано в твоих оригинальных стилях CSS
+        const musicControl = document.querySelector('body > div:nth-child(1)');
+        const introScreen = document.querySelector('body > div:nth-child(2)');
+        const audio = document.getElementById('bg-music');
 
         if (introScreen) {
             introScreen.addEventListener('click', () => {
@@ -226,7 +198,7 @@
             });
         }
 
-        // --- 2. Таймер обратного отсчета ---
+        // --- Таймер обратного отсчета ---
         const targetDate = new Date('2026-07-31T17:00:00').getTime();
 
         function updateTimer() {
@@ -253,7 +225,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // --- 3. Оптимизированное падение лепестков без лагов ---
+        // --- Плавные лепестки сакуры на аппаратном ускорении ---
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const maxPetals = isMobile ? 10 : 25; 
 
