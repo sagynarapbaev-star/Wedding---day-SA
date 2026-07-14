@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>S & A</title>
     
-    <!-- Подключаем оригинальные стили вашего сайта, чтобы вернуть весь дизайн -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Если ваши стили лежат в другой папке, например просто style.css, измените этот путь -->
+    <link rel="stylesheet" href="css/style.css">
     
     <style>
-        /* Добавляем точечные оптимизации для плавности, не ломая основной дизайн */
         html, body {
             overflow-x: hidden;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
+            -webkit-overflow-scrolling: touch;
         }
         
-        /* Включаем аппаратное ускорение для плавности анимаций на смартфонах */
         .section, img, div {
             backface-visibility: hidden;
             transform: translate3d(0, 0, 0);
             will-change: transform, opacity;
         }
 
-        /* Стиль для кнопки музыки, чтобы она не ломалась */
         .music-control-btn {
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -40,24 +36,20 @@
 </head>
 <body>
 
-    <!-- Оптимизированный аудио-плеер (загрузка отключена до клика, чтобы сайт не зависал) -->
     <audio id="bg-music" loop preload="none">
         <source src="audio/background.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Ваша оригинальная кнопка музыки (с сохранением ваших классов) -->
     <div class="music-wrapper">
         <span>Включить музыку</span>
         <div id="music-control" class="music-control-btn">🎵</div>
     </div>
 
-    <!-- Начальный экран открытия (Ваша оригинальная верстка) -->
     <div id="welcome-screen" class="welcome-overlay">
         <div class="welcome-content">
             <div class="names-logo">
                 <div>S&amp;A</div>
             </div>
-            <!-- Сюда автоматически подставится имя гостя из ссылки -->
             <div id="welcome-guest-box" style="display: none; margin: 15px 0;">
                 <p style="font-size: 1.1rem; margin: 5px 0;">Уважаемый(ая)</p>
                 <div id="welcome-guest-name" style="font-size: 1.4rem; font-weight: bold; color: #8b7355;"></div>
@@ -66,14 +58,11 @@
         </div>
     </div>
 
-    <!-- Основной контент (Ваши оригинальные блоки) -->
     <div class="main-content">
-        <!-- Блок 1: Приветствие -->
         <div class="section">
             <div class="section-content">
                 <h2>Дорогие Гости</h2>
                 
-                <!-- Блок с именем в самом начале -->
                 <div id="main-guest-box" style="display: none; margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 8px;">
                     <p style="margin: 0;">Дорогой(ая)</p>
                     <div id="guest-name" style="font-size: 1.4rem; font-weight: bold; color: #8b7355;"></div>
@@ -97,7 +86,6 @@
             </div>
         </div>
 
-        <!-- Блок 2: Слово молодоженов -->
         <div class="section">
             <div class="section-content">
                 <h2>Слово молодожёнов</h2>
@@ -107,7 +95,6 @@
             </div>
         </div>
 
-        <!-- Блок 3: Программа вечера -->
         <div class="section">
             <div class="section-content">
                 <h2>Программа вечера</h2>
@@ -128,7 +115,6 @@
             </div>
         </div>
 
-        <!-- Блок 4: Дресс-код -->
         <div class="section">
             <div class="section-content">
                 <h2>Пожелания к стилю</h2>
@@ -138,7 +124,6 @@
             </div>
         </div>
 
-        <!-- Блок 5: Карта -->
         <div class="section">
             <div class="section-content">
                 <h2>Адрес торжества</h2>
@@ -148,13 +133,11 @@
             </div>
         </div>
 
-        <!-- Блок 6: Таймер -->
         <div class="section">
             <div class="section-content">
                 <h2>До торжества осталось</h2>
                 <p>31 июля 2026 года в 17:00</p>
                 <div class="timer" id="countdown-timer">
-                    <!-- Будет заполняться через JS -->
                     <div class="timer-item"><div id="days" class="timer-val">00</div><div class="timer-label">Дней</div></div>
                     <div class="timer-item"><div id="hours" class="timer-val">00</div><div class="timer-label">Часов</div></div>
                     <div class="timer-item"><div id="minutes" class="timer-val">00</div><div class="timer-label">Мин</div></div>
@@ -164,7 +147,6 @@
         </div>
     </div>
 
-    <!-- Скрипты: Логика работы без тормозов -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const audio = document.getElementById('bg-music');
@@ -172,33 +154,26 @@
             const welcomeScreen = document.getElementById('welcome-screen');
             const openBtn = document.getElementById('open-btn');
 
-            // 1. ПОЛУЧЕНИЕ ИМЕНИ ИЗ ССЫЛКИ (?name=Сыймык)
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('name');
 
             if (guestName) {
                 const decodedName = decodeURIComponent(guestName);
-                
-                // Отображаем имя на заставке
                 document.getElementById('welcome-guest-name').innerText = decodedName;
                 document.getElementById('welcome-guest-box').style.display = 'block';
-
-                // Отображаем имя внутри основного приглашения
                 document.getElementById('guest-name').innerText = decodedName;
                 document.getElementById('main-guest-box').style.display = 'block';
             }
 
-            // 2. БЕЗОПАСНЫЙ ЗАПУСК МУЗЫКИ ПРИ ОТКРЫТИИ
             const startMusic = () => {
-                audio.preload = 'auto'; // Разрешаем загрузку только сейчас
+                audio.preload = 'auto';
                 audio.play().then(() => {
                     musicBtn.classList.add('playing');
                 }).catch(err => {
-                    console.log("Автозапуск заблокирован политикой браузера:", err);
+                    console.log(err);
                 });
             };
 
-            // При нажатии кнопки "Открыть" плавно скрываем заставку и запускаем плеер
             openBtn.addEventListener('click', () => {
                 welcomeScreen.style.opacity = '0';
                 welcomeScreen.style.transition = 'opacity 0.6s ease';
@@ -208,7 +183,6 @@
                 startMusic();
             });
 
-            // Кнопка включения/выключения музыки
             musicBtn.addEventListener('click', () => {
                 if (audio.paused) {
                     audio.play();
@@ -219,7 +193,6 @@
                 }
             });
 
-            // 3. ТАЙМЕР ОБРАТНОГО ОТСЧЕТА (Оптимизированный, без тормозов)
             const targetDate = new Date("July 31, 2026 17:00:00").getTime();
 
             const updateTimer = () => {
@@ -243,7 +216,7 @@
             };
 
             const timerInterval = setInterval(updateTimer, 1000);
-            updateTimer(); // первый запуск
+            updateTimer();
         });
     </script>
 </body>
